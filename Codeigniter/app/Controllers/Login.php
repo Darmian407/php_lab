@@ -19,13 +19,6 @@ class Login extends BaseController
         if (!$user) {
             echo view('templates/head');
 
-            $message = $session->get('message');
-            $type = $session->get('type');
-            $session->remove('message');
-            $session->remove('type');
-
-            echo view('templates/message', ['message' => $message, 'type' => $type]);
-
             echo view('login');
 
             echo view('templates/footer');
@@ -53,36 +46,19 @@ class Login extends BaseController
             if ($result['pass'] == $password) {
 
                 $data = [
+                    'message' => 'Loged Succesfuly!!!',
+                    'type' => 'success',
                     'user' => $result['email'],
                     'nick' => $result['nick'],
                     'loged' => true
                 ];
 
                 $session->set($data);
-
-                $data = [
-                    'message' => 'Loged Succesfuly!!!',
-                    'type' => 'success',
-                ];
-
-                $session->set($data);
                 return redirect('home');
             } else {
-                $data = [
-                    'message' => 'Incorrect password',
-                    'type' => 'danger',
-                ];
-
-                $session->set($data);
                 return redirect('login');
             }
         } else {
-            $data = [
-                'message' => 'No user with this email',
-                'type' => 'danger',
-            ];
-
-            $session->set($data);
             return redirect('login');
         }
     }

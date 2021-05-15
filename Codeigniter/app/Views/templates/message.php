@@ -1,12 +1,10 @@
-<?php
-if (isset($message) && isset($type)) {
-?>
-
-    <div class="uk-alert-<?= esc($type) ?> uk-margin-remove" uk-alert>
+<?php if (isset($errors)) { ?>
+    <div class="uk-alert-danger uk-border-rounded" uk-alert>
         <a class="uk-alert-close" uk-close></a>
-        <strong><?= ucwords(esc($type)) ?>:</strong> <?= esc($message) ?>
-    </div>
 
-<?php
-}
-?>
+        <?php foreach ($errors as $error) { ?>
+            <p><strong><?= $error ?></strong></p>
+        <?php } ?>
+
+    </div>
+<?php } ?>

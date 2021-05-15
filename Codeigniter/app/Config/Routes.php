@@ -33,10 +33,10 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index', ['as' => 'home']);
-$routes->get('codeigniter/public/login', 'Login::index', ['as' => 'login']);
-$routes->post('codeigniter/public/login', 'Login::receiveData');
-$routes->get('codeigniter/public/register', 'Register::index', ['as' => 'register']);
-$routes->post('codeigniter/public/register', 'Register::receiveData');
+$routes->get('/login', 'Login::index', ['as' => 'login']);
+$routes->post('/login', 'Login::receiveData');
+$routes->get('/register', 'Register::index', ['as' => 'register']);
+$routes->post('/register', 'Register::receiveData');
 
 /*
  * --------------------------------------------------------------------

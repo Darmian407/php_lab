@@ -11,43 +11,68 @@ class Register extends BaseController
 
     public function index()
     {
-        echo view('templates/head');
-
-        echo view('register');
-        
-        echo view('templates/footer');
+        return view('register');
     }
 
     public function receiveData()
     {
-        $request = service('request');
+        // Validaton Service
+        $validation =  \Config\Services::validation();
 
-        // Get parametters from http request
-        $email = $request->getVar('email');
-        $name = $request->getVar('name');
-        $lastname = $request->getVar('lastname');
-        $nick = $request->getVar('nick');
-        $password = $request->getVar('password');
+        $rules = [
+            'email' => [
+                'label' => 'Email',
+                'rules' => 'required|valid_email|is_unique[usuario.email,{email}]'
+            ],
 
-        // Bring model to the controller
-        $userModel = model('App\Models\UserModel');
+            'nick' => [
+                'label' => 'Nick',
+                'rules' => 'required|is_unique[usuario.nick,{nick}]'
+            ],
 
-        $result = $userModel->find($email);
+            'name' => [
+                'label' => 'Name',
+                'rules' => 'required|alpha_numeric_space'
+            ],
 
-        if (!$result) {
+            'lastName' => [
+                'label' => 'Lastname',
+                'rules' => 'required|alpha_numeric_space'
+            ],
 
+            'password' => [
+                'label' => 'Password',
+                'rules' => 'required|min_length[8]|matches[confirmPassword]'
+            ],
+
+            'confirmPassword' => [
+                'label' => 'Confirm Password',
+                'rules' => []
+            ]
+        ];
+
+        if (!$this->validate($rules)) {
             $data = [
-                'nombre' => $name,
-                'email' => $email,
-                'apellido' => $lastname,
-                'pass' => $password,
-                'nick' => $nick
+                'errors' => $validation->getErrors()
             ];
 
-            $userModel->insert($data);
-            
+            return view('register', $data);
         } else {
-            return view('register', [ 'message' => 'Exists a user with that email' ]);
+            // Request Service
+            $request = service('request');
+
+            // Session Service
+            $session = \Config\Services::session();
+
+            // Get parametters from http request
+            $email = $request->getVar('email');
+            $name = $request->getVar('name');
+            $lastname = $request->getVar('lastName');
+            $nick = $request->getVar('nick');
+            $password = $request->getVar('password');
+            $autor = $request->getVar('autor');
+
+            echo $email, $nick, $name, $lastname, $password, $autor;
         }
     }
 }
