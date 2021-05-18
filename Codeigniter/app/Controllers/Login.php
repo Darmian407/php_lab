@@ -17,11 +17,7 @@ class Login extends BaseController
         $user = $session->get('user');
 
         if (!$user) {
-            echo view('templates/head');
-
-            echo view('login');
-
-            echo view('templates/footer');
+            return view('login');
         } else {
             return redirect('home');
         }
@@ -29,37 +25,54 @@ class Login extends BaseController
 
     public function receiveData()
     {
-        $request = service('request');
+        // Services
+        $validation =  \Config\Services::validation();
         $session = \Config\Services::session();
 
-        // Get parametters from http request
-        $email = $request->getVar('email');
-        $password = $request->getVar('password');
+        $userModel = new \App\Models\UserModel();
 
-        // Bring model to the controller
-        $userModel = model('App\Models\UserModel');
+        $rules = [
+            'email' => [
+                'label' => 'Email',
+                'rules' => 'required|valid_email|is_not_unique[usuario.email,{email}]',
+                'errors' => [
+                    'is_not_unique' => 'Ingressed Email does not exist'
+                ]
+            ],
 
-        $result = $userModel->find($email);
+            'password' => [
+                'label' => 'Password',
+                'rules' => 'required|validate_password',
+                'errors' => [
+                    'validate_password' => 'Invalid Password'
+                ]
+            ],
+        ];
 
-        if ($result) {
+        if (!$this->validate($rules)) {
+            $data = [
+                'errors' => $validation->getErrors()
+            ];
 
-            if ($result['pass'] == $password) {
-
-                $data = [
-                    'message' => 'Loged Succesfuly!!!',
-                    'type' => 'success',
-                    'user' => $result['email'],
-                    'nick' => $result['nick'],
-                    'loged' => true
-                ];
-
-                $session->set($data);
-                return redirect('home');
-            } else {
-                return redirect('login');
-            }
+            return view('login', $data);
         } else {
-            return redirect('login');
+            $request = \Config\Services::request();
+
+            $user = $userModel->find($request->getVar('email'));
+
+            $data = [
+                'user' => [
+                    'email' => $user['email'],
+                    'name' => $user['nombre'],
+                    'lastName' => $user['apellido'],
+                    'nick' => $user['nick'],
+                    'DTYPE' => $user['DTYPE']
+                ],
+                'loged' => true
+            ];
+
+            $session->set($data);
+            return redirect('home');
         }
     }
 }

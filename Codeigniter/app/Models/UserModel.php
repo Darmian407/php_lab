@@ -15,6 +15,17 @@ class UserModel extends Model
     // This setting allows you to define the type of data that is returned.
     protected $returnType = 'array';
 
-    // This array should be updated with the field names that can be set during save, insert, or update methods.
-    protected $allowedFields = ['nombre', 'email', 'apellido', 'pass', 'nick'];
+    public function insert_user($email, $name, $lastname, $nick, $password, $autor, $birthDate){
+        
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
+        $this->db->query('INSERT INTO usuario (email, nick, nombre, apellido, nacimiento, password, dtype) VALUES ("' . $email . '","' . $nick . '","' . $name . '","' . $lastname . '","' . $birthDate . '","' . $hash . '"' . (($autor) ? ',"Autor")' : ',"Cliente")'));
+        
+        if($autor){
+            $this->db->query('INSERT INTO autores (nick) VALUES ("' . $nick . '")');
+        } else {
+            $this->db->query('INSERT INTO cliente (nick) VALUES ("' . $nick . '")');
+        }
+
+    }
 }
