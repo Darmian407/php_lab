@@ -1,4 +1,4 @@
-<div uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
 
     <nav class="uk-navbar-container" uk-navbar>
 
