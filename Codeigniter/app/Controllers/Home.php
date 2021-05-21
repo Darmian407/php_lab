@@ -6,11 +6,27 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		return view('welcome_message');
+		$session = \Config\Services::session();
+
+        $user = $session->get('user');
+
+		$data = [
+			'user' => $user
+		];
+
+		return view('home', $data);
 	}
 
 	public function planes()
 	{
-		return view('planes');
+		$session = \Config\Services::session();
+
+        $user = $session->get('user');
+
+		$data = [
+			'user' => $user
+		];
+
+		return view('planes', $data);
 	}
 }

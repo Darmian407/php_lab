@@ -1,7 +1,5 @@
 <!-- Head Template -->
 <?php echo view('templates/head') ?>
-<!-- NavBar -->
-<?php echo view('templates/nav') ?>
 
 <div class="uk-background-secondary">
     <div class="uk-container uk-flex uk-flex-center uk-flex-middle uk-height-viewport">

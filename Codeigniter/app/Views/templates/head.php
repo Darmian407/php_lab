@@ -16,11 +16,6 @@
 
     <title>Codeigniter</title>
 
-    <style>
-        body, h2  {
-            font-family: 'Raleway', sans-serif;
-        }
-    </style>
 </head>
 
 <body>

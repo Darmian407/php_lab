@@ -39,12 +39,17 @@ $routes->get('/planes', 'Home::planes', ['as' => 'planes']);
 $routes->get('/login', 'Login::index', ['as' => 'login']);
 $routes->post('/login', 'Login::receiveData');
 
+$routes->get('/logout', 'Logout::index', ['as' => 'logout']);
+
 $routes->get('/register', 'Register::index', ['as' => 'register']);
 $routes->post('/register', 'Register::receiveData');
 
-$routes->get('/perfil_usuario', 'Perfil::index', ['as' => 'perfil_usuario']);
+$routes->get('/profile', 'Profile::index', ['as' => 'profile']);
 
-$routes->get('/listas_visualizacion', 'Perfil::listas_visualizacion', ['as' => 'listas_visualizacion']);
+$routes->get('/listas_visualizacion', 'Profile::listas_visualizacion', ['as' => 'listas_visualizacion']);
+
+// Resources routes
+$routes->get('/createResource', 'Resource::createResource', ['as' => 'createResource']);
 
 
 /*

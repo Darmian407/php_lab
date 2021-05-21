@@ -105,6 +105,7 @@ class Register extends BaseController
                     'name' => $name,
                     'lastName' => $lastName,
                     'nick' => $nick,
+                    'birthDate' => $birthDate,
                     'DTYPE' => ($autor ? 'Autor' : 'Cliente')
                 ],
                 'loged' => true
