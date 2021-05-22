@@ -15,4 +15,6 @@ class ResourceModel extends Model
     // This setting allows you to define the type of data that is returned.
     protected $returnType = 'array';
 
+    protected $allowedFields = ['tipo', 'descargable', 'imagen', 'nombre', 'descripcion', 'autor'];
+
 }
