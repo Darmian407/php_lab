@@ -34,7 +34,7 @@ class Login extends BaseController
         $rules = [
             'email' => [
                 'label' => 'Email',
-                'rules' => 'required|valid_email|is_not_unique[usuario.email,{email}]',
+                'rules' => 'required|valid_email|is_not_unique[users.email,{email}]',
                 'errors' => [
                     'is_not_unique' => 'Ingressed Email does not exist'
                 ]
@@ -63,10 +63,10 @@ class Login extends BaseController
             $data = [
                 'user' => [
                     'email' => $user['email'],
-                    'name' => $user['nombre'],
-                    'lastName' => $user['apellido'],
+                    'name' => $user['name'],
+                    'lastName' => $user['lastname'],
                     'nick' => $user['nick'],
-                    'birthDate' => $user['nacimiento'],
+                    'birthDate' => $user['birthdate'],
                     'DTYPE' => $user['DTYPE']
                 ],
                 'loged' => true

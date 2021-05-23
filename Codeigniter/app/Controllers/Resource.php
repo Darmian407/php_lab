@@ -73,7 +73,7 @@ class Resource extends BaseController
             // Bring model to the controller
             $resourceModel = new \App\Models\ResourceModel();
 
-            if(!$descargable){
+            if (!$descargable) {
                 $descargable = false;
             }
 
@@ -90,8 +90,8 @@ class Resource extends BaseController
         }
     }
 
-    public function buscar_recurso(){
-
+    public function buscar_recurso()
+    {
         $request = service('request');
 
         $keywords = $request->getVar('keywords');
@@ -101,7 +101,5 @@ class Resource extends BaseController
         $result = $resourceModel->buscar_recursos($keywords);
 
         print_r($result);
-
-        
     }
 }

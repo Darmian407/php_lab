@@ -30,12 +30,12 @@ class Register extends BaseController
         $rules = [
             'email' => [
                 'label' => 'Email',
-                'rules' => 'required|valid_email|is_unique[usuario.email,{email}]'
+                'rules' => 'required|valid_email|is_unique[users.email,{email}]'
             ],
 
             'nick' => [
                 'label' => 'Nick',
-                'rules' => 'required|is_unique[usuario.nick,{nick}]'
+                'rules' => 'required|is_unique[users.nick,{nick}]'
             ],
 
             'name' => [
@@ -97,7 +97,7 @@ class Register extends BaseController
             // Bring model to the controller
             $userModel = new \App\Models\UserModel();
 
-            $userModel->insert_user($email, $name, $lastName, $nick, $password, $autor, $birthDate);
+            print_r($userModel->insert_user($email, $name, $lastName, $nick, $password, $autor, $birthDate));
 
             $data = [
                 'user' => [
