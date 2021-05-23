@@ -5,7 +5,7 @@
 <?php echo view('templates/nav') ?>
 
 <!--Web-->
-<div class="uk-grid-medium uk-visible@s uk-child-width-expand@s uk-text-center" uk-grid>
+<div class="uk-grid-medium uk-visible@s uk-child-width-expand@s uk-text-center uk-height-viewport" uk-grid>
 
     <div>
         <div class="uk-card uk-card uk-card-body uk-text-center ">

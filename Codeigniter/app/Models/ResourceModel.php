@@ -17,4 +17,13 @@ class ResourceModel extends Model
 
     protected $allowedFields = ['tipo', 'descargable', 'imagen', 'nombre', 'descripcion', 'autor'];
 
+
+    public function buscar_recursos($keywords){
+
+        $result = $this->db->query('SELECT nombre, autor FROM recurso WHERE (nombre LIKE "%' . $keywords . '%" OR autor LIKE "%' . $keywords . '%")');
+        
+
+        return $result->getResultArray();
+
+    }
 }

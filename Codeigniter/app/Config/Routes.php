@@ -51,6 +51,7 @@ $routes->get('/listas_visualizacion', 'Profile::listas_visualizacion', ['as' => 
 // Resources routes
 $routes->get('/createResource', 'Resource::createResource', ['as' => 'createResource']);
 $routes->post('/createResource', 'Resource::receiveData');
+$routes->post('/buscar_recurso', 'Resource::buscar_recurso');
 
 /*
  * --------------------------------------------------------------------

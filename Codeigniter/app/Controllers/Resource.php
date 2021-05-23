@@ -89,4 +89,19 @@ class Resource extends BaseController
             $resourceModel->insert($data);
         }
     }
+
+    public function buscar_recurso(){
+
+        $request = service('request');
+
+        $keywords = $request->getVar('keywords');
+
+        $resourceModel = new \App\Models\ResourceModel();
+
+        $result = $resourceModel->buscar_recursos($keywords);
+
+        print_r($result);
+
+        
+    }
 }

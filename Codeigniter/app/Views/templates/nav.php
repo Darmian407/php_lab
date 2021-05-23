@@ -15,15 +15,17 @@
                 <div>
                     <a class="uk-navbar-toggle uk-visible@s" uk-search-icon href="#"></a>
                     <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
-                        <form class="uk-search uk-search-navbar uk-width-1-1">
-                            <input class="uk-search-input" type="search" placeholder="Buscar" autofocus>
-                        </form>
+                        <div class="uk-search uk-search-navbar uk-width-1-1">
+                            <form action="http://localhost/buscar_recurso" method="POST">
+                                <input class="uk-search-input" type="text" id="keywords" name="keywords" size="30" maxlength="30" placeholder="Buscar" autofocus>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
                 <li>
                     <a class="uk-visible@s" href="#">Recursos</a>
-                    <div class="uk-navbar-dropdown">
+                    <div class="uk-navbar-dropdown" uk-dropdown="mode: click">
                         <ul class="uk-nav uk-navbar-dropdown-nav">
                             <li><a href="#">Documentos</a></li>
                             <li><a href="#">Audiolibros</a></li>
@@ -97,7 +99,7 @@
 
                     <li>
                         <a class="uk-margin-bottom" href="#">Recursos</a>
-                        <div class="uk-navbar-dropdown">
+                        <div class="uk-navbar-dropdown" uk-dropdown="mode: click">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li><a href="#">Documentos</a></li>
                                 <li><a href="#">Audiolibros</a></li>
