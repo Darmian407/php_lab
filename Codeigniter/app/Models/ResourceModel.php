@@ -20,7 +20,7 @@ class ResourceModel extends Model
 
     public function buscar_recursos($keywords)
     {
-        $result = $this->db->query('SELECT name, author FROM resources WHERE (name LIKE "%' . $keywords . '%" OR author LIKE "%' . $keywords . '%")');
+        $result = $this->db->query('SELECT r.name, u.name AS author, r.image, r.description FROM resources r JOIN users u ON r.author=u.id WHERE (r.name LIKE "%' . $keywords . '%" OR u.name LIKE "%' . $keywords . '%")');
 
         return $result->getResultArray();
     }

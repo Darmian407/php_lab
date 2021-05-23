@@ -100,6 +100,6 @@ class Resource extends BaseController
 
         $result = $resourceModel->buscar_recursos($keywords);
 
-        print_r($result);
+        return view('busqueda', ['result' => $result]);
     }
 }
