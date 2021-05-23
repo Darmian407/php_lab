@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-05-2021 a las 21:28:22
+-- Tiempo de generación: 23-05-2021 a las 21:57:08
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.5
 
@@ -85,6 +85,15 @@ CREATE TABLE `resources` (
   `author` int(11) NOT NULL,
   `subscription` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `resources`
+--
+
+INSERT INTO `resources` (`id`, `name`, `description`, `type`, `downloadable`, `image`, `author`, `subscription`) VALUES
+(1, 'libro1', 'descripcion libro1', 1, 1, 'dadasda', 2, 0),
+(2, 'libro2', 'descripcion libro2', 1, 1, 'dadasda', 2, 0),
+(3, 'libro3', 'descripcion libro3', 1, 1, 'dadasda', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -202,6 +211,18 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `resources`
+--
+ALTER TABLE `resources`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `types`
