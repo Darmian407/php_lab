@@ -35,6 +35,8 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index', ['as' => 'home']);
 
 $routes->get('/planes', 'Home::planes', ['as' => 'planes']);
+$routes->get('/paypal/success', 'Home::success', ['as' => 'success']);
+$routes->get('/paypal/onCancel', 'Home::onCancel', ['as' => 'onCancel']);
 
 $routes->get('/login', 'Login::index', ['as' => 'login']);
 $routes->post('/login', 'Login::receiveData');
@@ -52,6 +54,9 @@ $routes->get('/listas_visualizacion', 'Profile::listas_visualizacion', ['as' => 
 $routes->get('/createResource', 'Resource::createResource', ['as' => 'createResource']);
 $routes->post('/createResource', 'Resource::receiveData');
 $routes->post('/buscar_recurso', 'Resource::buscar_recurso');
+$routes->post('/buscar_tipo', 'Resource::buscar_tipo');
+$routes->post('/resource', 'Resource::resource');
+
 
 /*
  * --------------------------------------------------------------------

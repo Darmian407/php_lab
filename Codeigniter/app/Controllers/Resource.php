@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use function PHPSTORM_META\type;
+
 class Resource extends BaseController
 {
     public function __construct()
@@ -102,4 +104,31 @@ class Resource extends BaseController
 
         return view('busqueda', ['result' => $result]);
     }
+
+    public function buscar_tipo()
+    {
+        $request = service('request');
+
+        $tvar = $request->getVar('tvar');
+
+        $resourceModel = new \App\Models\ResourceModel();
+
+        $result = $resourceModel->buscar_tipos($tvar);
+
+        return view('Resources/slider_recurso', ['result' => $result,'type' => $result[0]['type']]);
+    }
+
+    public function resource()
+    {
+        $request = service('request');
+
+        $nvar = $request->getVar('nvar');
+
+        $resourceModel = new \App\Models\ResourceModel();
+
+        $result = $resourceModel->resource_i($nvar);
+        
+        return view('Resources/resource_detail', ['result' => $result[0]]);
+    }
+
 }

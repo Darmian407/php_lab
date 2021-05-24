@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-05-2021 a las 21:57:08
+-- Tiempo de generación: 23-05-2021 a las 21:28:22
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.5
 
@@ -85,15 +85,6 @@ CREATE TABLE `resources` (
   `author` int(11) NOT NULL,
   `subscription` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `resources`
---
-
-INSERT INTO `resources` (`id`, `name`, `description`, `type`, `downloadable`, `image`, `author`, `subscription`) VALUES
-(1, 'libro1', 'descripcion libro1', 1, 1, 'dadasda', 2, 0),
-(2, 'libro2', 'descripcion libro2', 1, 1, 'dadasda', 2, 0),
-(3, 'libro3', 'descripcion libro3', 1, 1, 'dadasda', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -213,18 +204,6 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT de la tabla `categories`
---
-ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `resources`
---
-ALTER TABLE `resources`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT de la tabla `types`
 --
 ALTER TABLE `types`
@@ -235,6 +214,13 @@ ALTER TABLE `types`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+ALTER TABLE `resources`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 
 --
 -- Restricciones para tablas volcadas
@@ -273,6 +259,9 @@ ALTER TABLE `resource_categories`
   ADD CONSTRAINT `resource_categories_resource_id_fk` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
+INSERT INTO `resources`( `name`, `description`, `type`, `downloadable`, `image`, `author`, `subscription`) VALUES ('libro1','descripcion libro1',1,1,'dadasda',2,0);
+INSERT INTO `resources`( `name`, `description`, `type`, `downloadable`, `image`, `author`, `subscription`) VALUES ('libro2','descripcion libro2',1,1,'dadasda',2,0);
+INSERT INTO `resources`( `name`, `description`, `type`, `downloadable`, `image`, `author`, `subscription`) VALUES ('libro3','descripcion libro3',1,1,'dadasda',2,0);
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

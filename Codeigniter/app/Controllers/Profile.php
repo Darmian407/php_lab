@@ -30,4 +30,6 @@ class Profile extends BaseController
 
 		return view('listas_visualizacion', $data);
 	}
+
+
 }

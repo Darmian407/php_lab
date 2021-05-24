@@ -82,6 +82,8 @@
 
                 <?= form_input($imagen) ?>
 
+                <?= form_dropdown ('tipo', $options) ?>
+                
                 <?= form_dropdown('tipo', $options) ?>
 
                 <div class="uk-margin-small">

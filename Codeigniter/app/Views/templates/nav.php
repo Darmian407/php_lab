@@ -27,15 +27,16 @@
                     <a class="uk-visible@s" href="#">Recursos</a>
                     <div class="uk-navbar-dropdown" uk-dropdown="mode: click">
                         <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li><a href="#">Documentos</a></li>
-                            <li><a href="#">Audiolibros</a></li>
-                            <li><a href="#">Libros</a></li>
-                            <li><a href="#">Podcasts</a></li>
-                            <li><a href="#">Revistas</a></li>
-                            <li><a href="#">Partituras</a></li>
+                            <li><a href="Resource/buscar_tipo?tvar=5">Documentos</a></li>
+                            <li><a href="Resource/buscar_tipo?tvar=2">Audiolibros</a></li>
+                            <li><a href="Resource/buscar_tipo?tvar=1">Libros</a></li>
+                            <li><a href="Resource/buscar_tipo?tvar=4">Podcasts</a></li>
+                            <li><a href="Resource/buscar_tipo?tvar=3">Revistas</a></li>
+                            <li><a href="Resource/buscar_tipo?tvar=6">Partituras</a></li>
                         </ul>
                     </div>
                 </li>
+
                 <li><a class="uk-visible@s" href="/planes">Planes</a></li>
 
                 <?php
