@@ -26,7 +26,7 @@ if (!empty($result)) {
                             }
                             ?>
                             <button class="uk-button uk-button-primary uk-margin-top .uk-width-1-1"><i class="far fa-bookmark"></i> Guardar </i></button>
-                            <button class="uk-button uk-button-primary uk-margin-top .uk-width-1-1"><i class="fas fa-plus"></i> Añadir a lista </i></button>
+                            <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="#modal-sections" uk-toggle><i class="fas fa-plus"></i> Añadir a lista </i></a>
                             <?php
                             if ($result['downloadable'] == 1) {
                             ?>
@@ -50,6 +50,52 @@ if (!empty($result)) {
 
         </div>
     </div>
+
+    <div id="modal-sections" uk-modal>
+        <div class="uk-modal-dialog">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">Modal Title</h2>
+            </div>
+            <div class="uk-modal-body">
+                    <!-- Message Template -->
+                <?php echo view('templates/message') ?>
+
+                <?= form_open('/addToLista/'.$result['id']) ?>
+
+                <?php
+
+                    $playlistModel = new \App\Models\PlaylistModel();
+                   
+                    // Session Service
+                    $session = \Config\Services::session();
+
+                    $user = $session->get('user');
+
+                    $playlists = [
+                        
+                    ];
+                    // Bring types from database
+                    $result = $playlistModel->getPlaylists($user['id']);
+                  
+                    foreach ($result as $playlist) {
+                        $playlists[$playlist['id']] = $playlist['name'];
+                    };
+
+                    $submit = array(
+                        'class' => 'uk-button uk-button-primary uk-border-pill uk-width-1-1',
+                        'type' => 'submit'
+                    );
+                ?>
+                <?= form_dropdown('listas', $playlists, [], ['class' => 'uk-select uk-margin-small uk-border-pill']) ?>
+
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <?= form_button($submit, 'Send') ?>
+            </div>
+        </div>
+    </div>
+
 <?php
 } else {
 ?>

@@ -8,6 +8,7 @@ class Profile extends BaseController
 	{
 		$session = \Config\Services::session();
 		helper('form');
+        helper('url');
 
 		$user = $session->get('user');
 
