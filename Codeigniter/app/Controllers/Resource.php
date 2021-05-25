@@ -136,7 +136,7 @@ class Resource extends BaseController
 
         $result = $resourceModel->buscar_tipos($idType);
 
-        return view('Resources/slider_recurso', ['result' => $result, 'type' => $result[0]['type']]);
+        return view('Resources/slider_recurso', ['result' => $result]);
     }
 
     public function buscar_id($idResource)
@@ -145,6 +145,6 @@ class Resource extends BaseController
 
         $result = $resourceModel->buscar_id($idResource);
 
-        return view('Resources/resource_detail', ['result' => $result[0]]);
+        return view('Resources/resource_detail', ['result' => $result]);
     }
 }

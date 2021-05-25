@@ -9,24 +9,24 @@
         <!-- <h3 class="uk-margin-bottom"></h3> -->
         <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-4@m uk-grid" uk-height-viewport="offset-top: true; offset-bottom: 50">
             <?php
-            if (isset($result)) {
-
+            if (!empty($result)) {
                 foreach ($result as $recurso) {
             ?>
                     <li>
                         <div class="uk-panel">
-                            <img src="<?= $recurso['image']?>" alt="">
+                            <img src="<?= $recurso['image'] ?>" alt="">
                         </div>
                         <div class="uk-card uk-card-secondary uk-card-">
-                            <h3 class="uk-margin-bottom uk-text-center"><?= $recurso['name']?></h3>
-                            <p class="uk-text-primary uk-margin-top uk-text-center">Autor: <?= $recurso['author']?></p>
+                            <h3 class="uk-margin-bottom uk-text-center"><?= $recurso['name'] ?></h3>
+                            <p class="uk-text-primary uk-margin-top uk-text-center">Autor: <?= $recurso['author'] ?></p>
+                            <a class="uk-text-center" href="/buscar_id/<?=$recurso['id']?>">Mas info</a>
                         </div>
                     </li>
             <?php
                 }
             }
             ?>
-            
+
         </ul>
 
         <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>

@@ -5,7 +5,7 @@
 <?php echo view('templates/nav') ?>
 
 <?php
-if (isset($result)) {
+if (!empty($result)) {
 ?>
     <div class="uk-container uk-height-viewport" id="container">
         <div>
@@ -18,7 +18,6 @@ if (isset($result)) {
                             if ($result['type'] == 1 || 3 || 5 || 6) {
                             ?>
                                 <button class="uk-button uk-button-primary uk-margin-top uk-width-1-1"><i class="fas fa-glasses"></i> Leer vista previa</i></button>
-
                             <?php
                             } else {
                             ?>
@@ -29,9 +28,9 @@ if (isset($result)) {
                             <button class="uk-button uk-button-primary uk-margin-top .uk-width-1-1"><i class="far fa-bookmark"></i> Guardar </i></button>
                             <button class="uk-button uk-button-primary uk-margin-top .uk-width-1-1"><i class="fas fa-plus"></i> Añadir a lista </i></button>
                             <?php
-                            if ($result['dl'] == 1) {
+                            if ($result['downloadable'] == 1) {
                             ?>
-                            <button class="uk-button uk-button-primary uk-margin-top .uk-width-1-1"><i class="fas fa-arrow-alt-circle-down"></i> Descargar</i></button>
+                                <button class="uk-button uk-button-primary uk-margin-top .uk-width-1-1"><i class="fas fa-arrow-alt-circle-down"></i> Descargar</i></button>
                             <?php
                             }
                             ?>
@@ -50,6 +49,10 @@ if (isset($result)) {
 
         </div>
     </div>
+<?php
+} else {
+?>
+    <h1>No se encontro el recurso</h1>
 <?php
 }
 ?>

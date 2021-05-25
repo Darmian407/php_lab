@@ -38,7 +38,7 @@ class ResourceModel extends Model
     public function insertResource($tipo, $descargable, $imagen, $nombre, $descripcion, $autor, $categories, $fileName)
     {
         $this->db->query('INSERT INTO resources (name, description, type, downloadable, image, author, filename) VALUES ("' . $nombre . '","' . $descripcion . '","' . $tipo . '","' . $descargable . '","' . $imagen . '","' . $autor . '","' . $fileName . '")');
-        
+
         $query = $this->db->query('SELECT MAX(id) AS id FROM resources');
         $newId = $query->getResultArray();
 
@@ -49,13 +49,19 @@ class ResourceModel extends Model
 
     public function buscar_tipos($nameType)
     {
-        $result = $this->db->query('SELECT t.name AS type, r.name, u.name AS author, r.image, r.description FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id WHERE t.name = ("' . $nameType . '") ');
+        $result = $this->db->query('SELECT t.name AS type, r.name, u.name AS author, r.image, r.description, r.id FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id WHERE t.name = ("' . $nameType . '") ');
         return $result->getResultArray();
     }
 
-    public function buscar_id($idResurce){
-        $result = $this->db->query('SELECT r.downloadable AS dl, t.name AS type, r.name, u.name AS author, r.image AS image, r.description FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id WHERE r.id = ("' . $idResurce . '") ');
-        return $result->getResultArray();
-    }
+    public function buscar_id($idResurce)
+    {
+        $query = $this->db->query('SELECT r.downloadable, t.name AS type, r.name, u.name AS author, r.image AS image, r.description, r.filename FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id WHERE r.id = ("' . $idResurce . '") ');
 
+        if ($query) {
+            $result = $query->getFirstRow('array');
+            return $result;
+        }
+
+        return [];
+    }
 }
