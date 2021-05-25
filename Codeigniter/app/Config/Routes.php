@@ -54,8 +54,8 @@ $routes->get('/listas_visualizacion', 'Profile::listas_visualizacion', ['as' => 
 $routes->get('/createResource', 'Resource::createResource', ['as' => 'createResource']);
 $routes->post('/createResource', 'Resource::receiveData');
 $routes->post('/buscar_recurso', 'Resource::buscar_recurso');
-$routes->post('/buscar_tipo', 'Resource::buscar_tipo');
-$routes->post('/resource', 'Resource::resource');
+$routes->get('/buscar_tipo/(:alpha)', 'Resource::buscar_tipo/$1');
+$routes->get('/buscar_id/(:num)', 'Resource::buscar_id/$1');
 
 
 /*

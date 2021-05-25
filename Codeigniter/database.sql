@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-05-2021 a las 21:28:22
+-- Tiempo de generación: 24-05-2021 a las 17:06:45
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.5
 
@@ -32,13 +32,6 @@ CREATE TABLE `authors` (
   `bibliography` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Volcado de datos para la tabla `authors`
---
-
-INSERT INTO `authors` (`user_id`, `bibliography`) VALUES
-(2, '');
-
 -- --------------------------------------------------------
 
 --
@@ -51,6 +44,15 @@ CREATE TABLE `categories` (
   `father` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `father`) VALUES
+(1, 'Tecnologia', NULL),
+(2, 'Gastronomia', NULL),
+(3, 'Noticias', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -61,13 +63,6 @@ CREATE TABLE `clients` (
   `user_id` int(11) NOT NULL,
   `subscribed` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `clients`
---
-
-INSERT INTO `clients` (`user_id`, `subscribed`) VALUES
-(1, 0);
 
 -- --------------------------------------------------------
 
@@ -83,7 +78,8 @@ CREATE TABLE `resources` (
   `downloadable` tinyint(1) NOT NULL,
   `image` text COLLATE utf8_unicode_ci NOT NULL,
   `author` int(11) NOT NULL,
-  `subscription` tinyint(1) NOT NULL
+  `subscription` tinyint(1) NOT NULL DEFAULT 0,
+  `filename` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -136,14 +132,6 @@ CREATE TABLE `users` (
   `image` text COLLATE utf8_unicode_ci NOT NULL,
   `DTYPE` varchar(30) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `users`
---
-
-INSERT INTO `users` (`id`, `name`, `lastname`, `email`, `password`, `nick`, `birthdate`, `image`, `DTYPE`) VALUES
-(1, 'Agustin', 'Peraza', 'agu@gmail.com', '$2y$10$MORLULMmGZjXiM.SAXAanurTqjC/hkyCQocMlg4xdULnPVEoFRHc2', 'Agu458', '2000-09-04', '', 'Cliente'),
-(2, 'Mauricio', 'Camacho', 'oci@gmail.com', '$2y$10$cocxEOzu6kV/8WM213CJr.rwoAkQFaaYYBGKvwQU2z0Cp.PP12nla', 'Oci', '2021-04-26', '', 'Autor');
 
 --
 -- Índices para tablas volcadas
@@ -204,6 +192,18 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `resources`
+--
+ALTER TABLE `resources`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `types`
 --
 ALTER TABLE `types`
@@ -213,14 +213,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
-ALTER TABLE `resources`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 
 --
 -- Restricciones para tablas volcadas
@@ -259,9 +252,6 @@ ALTER TABLE `resource_categories`
   ADD CONSTRAINT `resource_categories_resource_id_fk` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
-INSERT INTO `resources`( `name`, `description`, `type`, `downloadable`, `image`, `author`, `subscription`) VALUES ('libro1','descripcion libro1',1,1,'dadasda',2,0);
-INSERT INTO `resources`( `name`, `description`, `type`, `downloadable`, `image`, `author`, `subscription`) VALUES ('libro2','descripcion libro2',1,1,'dadasda',2,0);
-INSERT INTO `resources`( `name`, `description`, `type`, `downloadable`, `image`, `author`, `subscription`) VALUES ('libro3','descripcion libro3',1,1,'dadasda',2,0);
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

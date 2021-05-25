@@ -27,6 +27,8 @@ class UserModel extends Model
         } else {
             $this->db->query('INSERT INTO clients (user_id) VALUES ("' . $result['id'] . '")');
         }
+
+        return $result;
     }
 
     public function subscribe()

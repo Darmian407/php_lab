@@ -15,6 +15,4 @@ class UserModel extends Model
 
     // This setting allows you to define the type of data that is returned.
     protected $returnType = 'array';
-
-    
 }

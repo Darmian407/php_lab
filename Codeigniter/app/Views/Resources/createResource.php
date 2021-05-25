@@ -4,7 +4,7 @@
 <div class="uk-background-secondary">
     <div class="uk-container uk-flex uk-flex-center uk-flex-middle uk-height-viewport">
         <div class="uk-card uk-card-default uk-border-rounded uk-width-1-2 uk-animation-scale-up">
-            
+
             <div class="uk-card-body">
 
                 <h2 class="uk-text-center">Crear Recurso</h2>
@@ -12,7 +12,7 @@
                 <!-- Message Template -->
                 <?php echo view('templates/message') ?>
 
-                <?= form_open('') ?>
+                <?= form_open_multipart('') ?>
 
                 <?php
 
@@ -43,24 +43,6 @@
                     'value' => set_value('imagen')
                 );
 
-                $options = [
-                    'documento'  => 'Documento',
-                    'audiolibro'    => 'Audiolibro',
-                    'libros'  => 'Libro',
-                    'podcasts' => 'Podcasts',
-                    'revistas' => 'Revistas',
-                    'partituras' => 'Partituras',
-                ];
-
-                // $tipo = array(
-                //     'name' => 'tipo',
-                //     'id' => 'tipo',
-                //     'class' => 'uk-input uk-margin-small uk-padding-small uk-border-pill ' . ((isset($errors) && array_key_exists('tipo', $errors)) ? "uk-form-danger" : ""),
-                //     'type' => 'text',
-                //     'placeholder' => 'Enter Type',
-                //     'value' => set_value('tipo')
-                // );
-
                 $descargable = array(
                     'name' => 'descargable',
                     'id' => 'descargable',
@@ -82,12 +64,19 @@
 
                 <?= form_input($imagen) ?>
 
-                <?= form_dropdown ('tipo', $options) ?>
-                
-                <?= form_dropdown('tipo', $options) ?>
+                <?= form_dropdown('tipo', $types, [], ['class' => 'uk-select uk-margin-small uk-border-pill']) ?>
+
+                <?= form_multiselect('categories[]', $categories, [], ['class' => 'uk-select uk-margin-small uk-border-rounded']) ?>
 
                 <div class="uk-margin-small">
                     <label for="descargable"><?= form_checkbox($descargable) ?>Downloadable?</label>
+                </div>
+
+                <div class="uk-margin-small">
+                    <div uk-form-custom="target: true">
+                        <input type="file" name="file" id="file">
+                        <input class="uk-input uk-border-pill" type="text" placeholder="Select file" disabled>
+                    </div>
                 </div>
 
                 <?= form_button($submit, 'Send') ?>

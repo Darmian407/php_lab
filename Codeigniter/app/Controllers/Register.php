@@ -97,16 +97,17 @@ class Register extends BaseController
             // Bring model to the controller
             $userModel = new \App\Models\UserModel();
 
-            print_r($userModel->insert_user($email, $name, $lastName, $nick, $password, $autor, $birthDate));
+            $newUser = $userModel->insert_user($email, $name, $lastName, $nick, $password, $autor, $birthDate);
 
             $data = [
                 'user' => [
-                    'email' => $email,
-                    'name' => $name,
-                    'lastName' => $lastName,
-                    'nick' => $nick,
-                    'birthDate' => $birthDate,
-                    'DTYPE' => ($autor ? 'Autor' : 'Cliente')
+                    'id' => $newUser['id'],
+                    'email' => $newUser['email'],
+                    'name' => $newUser['name'],
+                    'lastName' => $newUser['lastname'],
+                    'nick' => $newUser['nick'],
+                    'birthDate' => $newUser['birthdate'],
+                    'DTYPE' => $newUser['DTYPE']
                 ],
                 'loged' => true
             ];

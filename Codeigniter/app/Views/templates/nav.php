@@ -27,12 +27,17 @@
                     <a class="uk-visible@s" href="#">Recursos</a>
                     <div class="uk-navbar-dropdown" uk-dropdown="mode: click">
                         <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li><a href="Resource/buscar_tipo?tvar=5">Documentos</a></li>
-                            <li><a href="Resource/buscar_tipo?tvar=2">Audiolibros</a></li>
-                            <li><a href="Resource/buscar_tipo?tvar=1">Libros</a></li>
-                            <li><a href="Resource/buscar_tipo?tvar=4">Podcasts</a></li>
-                            <li><a href="Resource/buscar_tipo?tvar=3">Revistas</a></li>
-                            <li><a href="Resource/buscar_tipo?tvar=6">Partituras</a></li>
+                            <?php
+                            $resourceModel = new \App\Models\ResourceModel();
+
+                            // Bring types from database
+                            $types = $resourceModel->getTypes();
+                            foreach ($types as $type) {
+                            ?>
+                                <li><a href="/buscar_tipo/<?= $type['name'] ?>"><?= $type['name'] ?></a></li>
+                            <?php
+                            };
+                            ?>
                         </ul>
                     </div>
                 </li>

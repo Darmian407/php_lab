@@ -21,7 +21,7 @@
                     </li>
 
                     <li class="uk-width-2-3">
-                        <a class="uk-text-center" href="Resource/resource?nvar=<?=$recurso['name']?>"> <?= $recurso['name']?> </a>
+                        <a class="uk-text-center" href="/buscar_id/<?=$recurso['id']?>"> <?= $recurso['name']?> </a>
                         <hr class="uk-divider-small uk-text-center">
                         <h3><?= $recurso['description']?></h3>
                         <h3 class="uk-text-small uk-text-primary">Autor:    <?= $recurso['author']?></h3> 

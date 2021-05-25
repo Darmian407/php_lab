@@ -17,24 +17,44 @@ class ResourceModel extends Model
 
     protected $allowedFields = ['type', 'downloadable', 'image', 'name', 'description', 'author'];
 
-
     public function buscar_recursos($keywords)
     {
-        $result = $this->db->query('SELECT t.name AS type, r.name, u.name AS author, r.image, r.description FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id WHERE (r.name LIKE "%' . $keywords . '%" OR u.name LIKE "%' . $keywords . '%")');
-
+        $result = $this->db->query('SELECT t.name AS type, r.name, u.name AS author, r.image, r.description, r.id FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id WHERE (r.name LIKE "%' . $keywords . '%" OR u.name LIKE "%' . $keywords . '%")');
         return $result->getResultArray();
     }
 
-    public function buscar_tipos($tvar)
+    public function getTypes()
     {
-        $result = $this->db->query('SELECT t.name AS type, r.name, u.name AS author, r.image, r.description FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id WHERE t.id = ("' . $tvar . '") ');
-
+        $result = $this->db->query('SELECT * FROM types ORDER BY id');
         return $result->getResultArray();
     }
 
-    public function resource_i($nvar){
-        $result = $this->db->query('SELECT r.downloadable AS dl, t.name AS type, r.name, u.name AS author, r.image AS image, r.description FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id WHERE r.name = ("' . $nvar . '") ');
+    public function getCategories()
+    {
+        $result = $this->db->query('SELECT * FROM categories ORDER BY id');
+        return $result->getResultArray();
+    }
+
+    public function insertResource($tipo, $descargable, $imagen, $nombre, $descripcion, $autor, $categories, $fileName)
+    {
+        $this->db->query('INSERT INTO resources (name, description, type, downloadable, image, author, filename) VALUES ("' . $nombre . '","' . $descripcion . '","' . $tipo . '","' . $descargable . '","' . $imagen . '","' . $autor . '","' . $fileName . '")');
         
+        $query = $this->db->query('SELECT MAX(id) AS id FROM resources');
+        $newId = $query->getResultArray();
+
+        foreach ($categories as $category) {
+            $this->db->query('INSERT INTO resource_categories (resource_id,category_id) VALUES ("' . $newId[0]['id'] . '","' . $category . '")');
+        }
+    }
+
+    public function buscar_tipos($nameType)
+    {
+        $result = $this->db->query('SELECT t.name AS type, r.name, u.name AS author, r.image, r.description FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id WHERE t.name = ("' . $nameType . '") ');
+        return $result->getResultArray();
+    }
+
+    public function buscar_id($idResurce){
+        $result = $this->db->query('SELECT r.downloadable AS dl, t.name AS type, r.name, u.name AS author, r.image AS image, r.description FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id WHERE r.id = ("' . $idResurce . '") ');
         return $result->getResultArray();
     }
 

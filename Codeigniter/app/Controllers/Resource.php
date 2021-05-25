@@ -18,24 +18,40 @@ class Resource extends BaseController
 
     public function createResource()
     {
-        return view('Resources/createResource');
+        $resourceModel = new \App\Models\ResourceModel();
+        $data = [
+            'types' => [],
+            'categories' => []
+        ];
+
+        // Bring types from database
+        $types = $resourceModel->getTypes();
+        foreach ($types as $type) {
+            $data['types'][$type['id']] = $type['name'];
+        };
+
+        // Bring categories from database
+        $categories = $resourceModel->getCategories();
+        foreach ($categories as $category) {
+            $data['categories'][$category['id']] = $category['name'];
+        };
+
+        return view('Resources/createResource', $data);
     }
 
     public function receiveData()
     {
         // Validaton Service
         $validation =  \Config\Services::validation();
+        // Bring model to the controller
+        $resourceModel = new \App\Models\ResourceModel();
 
+        // Rules for validation
         $rules = [
             'tipo' => [
                 'label' => 'Tipo',
                 'rules' => 'required'
             ],
-
-            // 'imagen' => [
-            //     'label' => 'Imagen',
-            //     'rules' => 'required|valid_url'
-            // ],
 
             'nombre' => [
                 'label' => 'Nombre',
@@ -52,15 +68,28 @@ class Resource extends BaseController
         if (!$this->validate($rules)) {
 
             $data = [
-                'errors' => $validation->getErrors()
+                'errors' => $validation->getErrors(),
+                'types' => [],
+                'categories' => []
             ];
+
+            // Bring types from database
+            $types = $resourceModel->getTypes();
+            foreach ($types as $type) {
+                $data['types'][$type['id']] = $type['name'];
+            };
+
+            // Bring categories from database
+            $categories = $resourceModel->getCategories();
+            foreach ($categories as $category) {
+                $data['categories'][$category['id']] = $category['name'];
+            };
 
             return view('Resources/createResource', $data);
         } else {
             // Session Service
             $session = \Config\Services::session();
             $user = $session->get('user');
-
 
             // Request Service
             $request = service('request');
@@ -71,27 +100,23 @@ class Resource extends BaseController
             $imagen = $request->getVar('imagen');
             $nombre = $request->getVar('nombre');
             $descripcion = $request->getVar('descripcion');
-
-            // Bring model to the controller
-            $resourceModel = new \App\Models\ResourceModel();
+            $categories = $request->getVar('categories');
+            $file = $request->getFile('file');
 
             if (!$descargable) {
                 $descargable = false;
             }
 
-            $data = [
-                'tipo' => $tipo,
-                'descargable' => $descargable,
-                'imagen' => $imagen,
-                'nombre' => $nombre,
-                'descripcion' => $descripcion,
-                'autor' => $user['nick']
-            ];
+            // Save file into the uploads folder in the public one if is valid and has not changed
+            if ($file->isValid() && !$file->hasMoved()) {
+                $file->move('./uploads', $file->getRandomName());
+            }
 
-            $resourceModel->insert($data);
+            // Persists the ingressed data into the database
+            $resourceModel->insertResource($tipo, $descargable, $imagen, $nombre, $descripcion, $user['id'], $categories, $file->getName());
         }
     }
-
+    
     public function buscar_recurso()
     {
         $request = service('request');
@@ -105,30 +130,21 @@ class Resource extends BaseController
         return view('busqueda', ['result' => $result]);
     }
 
-    public function buscar_tipo()
+    public function buscar_tipo($idType)
     {
-        $request = service('request');
-
-        $tvar = $request->getVar('tvar');
-
         $resourceModel = new \App\Models\ResourceModel();
 
-        $result = $resourceModel->buscar_tipos($tvar);
+        $result = $resourceModel->buscar_tipos($idType);
 
-        return view('Resources/slider_recurso', ['result' => $result,'type' => $result[0]['type']]);
+        return view('Resources/slider_recurso', ['result' => $result, 'type' => $result[0]['type']]);
     }
 
-    public function resource()
+    public function buscar_id($idResource)
     {
-        $request = service('request');
-
-        $nvar = $request->getVar('nvar');
-
         $resourceModel = new \App\Models\ResourceModel();
 
-        $result = $resourceModel->resource_i($nvar);
-        
+        $result = $resourceModel->buscar_id($idResource);
+
         return view('Resources/resource_detail', ['result' => $result[0]]);
     }
-
 }
