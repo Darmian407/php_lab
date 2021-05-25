@@ -21,8 +21,8 @@
                     </li>
 
                     <li class="uk-width-2-3">
-                        <a class="uk-text-center" href="/buscar_id/<?=$recurso['id']?>"> <?= $recurso['name']?> </a>
-                        <hr class="uk-divider-small uk-text-center">
+                        <a class="uk-text-center uk-text-large" href="/buscar_id/<?=$recurso['id']?>"> <?= $recurso['name']?> </a>
+                        <hr class="uk-divider-small">
                         <h3><?= $recurso['description']?></h3>
                         <h3 class="uk-text-small uk-text-primary">Autor:    <?= $recurso['author']?></h3> 
                         <h3>Tipo: <?= $recurso['type']?></h3>   

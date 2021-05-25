@@ -41,7 +41,8 @@ if (!empty($result)) {
                         <h1 class="uk-text-center "><?= $result['name'] ?></h1>
                         <hr class="uk-divider-small uk-text-center">
                         <h3><?= $result['description'] ?></h3>
-                        <h3 class="uk-text-small uk-text-primary"><i class="far fa-user"></i> Autor: <?= $result['author'] ?></h3>
+                        <a class="uk-text-small uk-text-primary" href="/buscar_autor/<?=$result['authorId']?>"><i class="far fa-user"></i> Autor: <?= $result['author'] ?></a>
+                       
                     </li>
                 </ul>
 

@@ -10,8 +10,16 @@ class Home extends BaseController
 
         $user = $session->get('user');
 
+		$resourceModel = new \App\Models\ResourceModel();
+
+        $result = $resourceModel->buscar_todo();
+
+		$types = $resourceModel->getTypes();
+
 		$data = [
-			'user' => $user
+			'user' => $user,
+			'result' => $result,
+			'types' => $types
 		];
 
 		return view('home', $data);

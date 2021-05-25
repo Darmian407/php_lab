@@ -137,6 +137,7 @@ class Resource extends BaseController
         $result = $resourceModel->buscar_tipos($idType);
 
         return view('Resources/slider_recurso', ['result' => $result]);
+        
     }
 
     public function buscar_id($idResource)
@@ -147,4 +148,35 @@ class Resource extends BaseController
 
         return view('Resources/resource_detail', ['result' => $result]);
     }
+
+    public function buscar_autor($idAutor)
+    {
+        $resourceModel = new \App\Models\ResourceModel();
+
+        $types = $resourceModel->getTypes();
+
+        $result = $resourceModel->buscar_recursos_autor($idAutor);
+
+        $autor = $resourceModel->buscar_autor($idAutor);
+
+		$data = [
+			'result' => $result,
+			'types' => $types,
+            'autor' => $autor
+
+		];
+
+        // print_r($types);
+        // echo "<br><br>";
+        // print_r($result);
+        // echo "<br><br>";
+        // print_r($autor);
+        // echo "<br><br>";
+        // print_r($autor['author']);
+        // echo "<br><br>";
+        
+		return view('Resources/recursos_autor', $data);
+
+    }
+
 }

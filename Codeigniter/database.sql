@@ -109,7 +109,7 @@ CREATE TABLE `types` (
 --
 
 INSERT INTO `types` (`id`, `name`) VALUES
-(2, 'Audio-Libro'),
+(2, 'AudioLibro'),
 (5, 'Documento'),
 (1, 'Libro'),
 (4, 'Podcast'),

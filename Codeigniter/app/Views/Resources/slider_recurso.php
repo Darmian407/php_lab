@@ -19,7 +19,7 @@
                         <div class="uk-card uk-card-secondary uk-card-">
                             <h3 class="uk-margin-bottom uk-text-center"><?= $recurso['name'] ?></h3>
                             <p class="uk-text-primary uk-margin-top uk-text-center">Autor: <?= $recurso['author'] ?></p>
-                            <a class="uk-text-center" href="/buscar_id/<?=$recurso['id']?>">Mas info</a>
+                            <a class="uk-text-center uk-button-small uk-button-default" href="/buscar_id/<?=$recurso['id']?>">Mas info</a>
                         </div>
                     </li>
             <?php

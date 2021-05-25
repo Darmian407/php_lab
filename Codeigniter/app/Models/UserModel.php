@@ -40,4 +40,14 @@ class UserModel extends Model
         $this->db->query('UPDATE clients c SET subscribed=1 WHERE c.user_id = "' . $user['id'] . '" ');
      
     }
+
+    public function follow($authorId,$userId){
+
+        $session = \Config\Services::session();
+
+        $user = $session->get('user');
+
+        $this->db->query('INSERT INTO author_client (author_id, user_id) VALUES ("' . $authorId . '","' . $userId . '")');
+
+    }
 }
