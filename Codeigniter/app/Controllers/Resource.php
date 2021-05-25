@@ -165,15 +165,6 @@ class Resource extends BaseController
             'autor' => $autor
 
 		];
-
-        // print_r($types);
-        // echo "<br><br>";
-        // print_r($result);
-        // echo "<br><br>";
-        // print_r($autor);
-        // echo "<br><br>";
-        // print_r($autor['author']);
-        // echo "<br><br>";
         
 		return view('Resources/recursos_autor', $data);
 

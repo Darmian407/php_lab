@@ -4,12 +4,17 @@ namespace App\Controllers;
 
 class Profile extends BaseController
 {
+
+	public function __construct()
+    {
+        helper('form');
+        helper('url');
+    }
+
 	public function index()
 	{
 		$session = \Config\Services::session();
-		helper('form');
-        helper('url');
-
+		
 		$user = $session->get('user');
 
 		$data = [

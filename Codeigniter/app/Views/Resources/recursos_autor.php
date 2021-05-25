@@ -76,7 +76,7 @@
                     <hr class="uk-divider-small">
                     <li class="uk-margin-bottom">Descripcion</li>
                 </div>
-                <a class="uk-button uk-button-default uk-margin-top .uk-width-1-1" href="/seguir/<?= $autor['id'] ?>"> Seguir </i></a>
+                <a class="uk-button uk-button-default uk-margin-top .uk-width-1-1" href="/follow/<?= $autor['authorId'] ?>"> Seguir </i></a>
             </div>
 
         </div>

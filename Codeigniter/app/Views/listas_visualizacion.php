@@ -5,9 +5,8 @@
 
 <div class="uk-margin-left uk-height-viewport">
         <div class="uk-margin-bottom uk-text-center">
-            <h1>Listas de visualización</h1>
+            <h1>Listas de visualizacion</h1>
             <button class="uk-button uk-button-primary uk-margin-small-right" type="button" uk-toggle="target: #my-id">Open</button>
-
         </div>
         <ul uk-accordion>
             <li class="uk-close">
@@ -166,7 +165,7 @@
         </ul>
 
     </div>
-    <?php echo view('playlist')?>
 
+    <?php echo view('playlist')?>
 <!-- Footer Template -->
 <?php echo view('templates/footer') ?>

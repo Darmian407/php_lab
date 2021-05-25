@@ -49,6 +49,10 @@ $routes->post('/register', 'Register::receiveData');
 $routes->get('/profile', 'Profile::index', ['as' => 'profile']);
 
 $routes->get('/listas_visualizacion', 'Profile::listas_visualizacion', ['as' => 'listas_visualizacion']);
+$routes->post('/listas_visualizacion/addLista', 'Playlist::agregar_lista');
+
+$routes->get('/follow/(:num)', 'Followers::follow/$1');
+
 
 // Resources routes
 $routes->get('/createResource', 'Resource::createResource', ['as' => 'createResource']);

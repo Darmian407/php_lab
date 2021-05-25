@@ -41,13 +41,19 @@ class UserModel extends Model
      
     }
 
-    public function follow($authorId,$userId){
+    public function follow($authorId){
 
         $session = \Config\Services::session();
 
         $user = $session->get('user');
 
-        $this->db->query('INSERT INTO author_client (author_id, user_id) VALUES ("' . $authorId . '","' . $userId . '")');
+        $query = $this->db->query('SELECT author_id, client_id FROM author_client WHERE author_id = "' . $authorId . '" AND client_id = "' . $user['id'] . '"' );
+
+        $validar = $query->getResultArray();
+    
+        if(empty($validar)){
+          $this->db->query('INSERT INTO author_client (author_id, client_id) VALUES ("' . $authorId . '","' . $user['id'] . '")');
+        }
 
     }
 }

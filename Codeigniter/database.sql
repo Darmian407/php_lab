@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-05-2021 a las 20:38:40
+-- Tiempo de generación: 25-05-2021 a las 20:58:19
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -95,8 +95,9 @@ CREATE TABLE `playlist` (
 --
 
 INSERT INTO `playlist` (`id`, `user_id`, `name`) VALUES
-(1, 1, 'Lista'),
-
+(1, 1, '0'),
+(2, 1, '0'),
+(3, 1, 'Coso');
 
 -- --------------------------------------------------------
 
