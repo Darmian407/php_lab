@@ -52,6 +52,7 @@ $routes->get('/listas_visualizacion', 'Profile::listas_visualizacion', ['as' => 
 $routes->post('/listas_visualizacion/addLista', 'Playlist::agregar_lista');
 
 $routes->get('/follow/(:num)', 'Followers::follow/$1');
+$routes->get('/followers/(:num)', 'Followers::followers/$1');
 
 
 // Resources routes

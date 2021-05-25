@@ -56,4 +56,15 @@ class UserModel extends Model
         }
 
     }
+
+    public function followers(){
+
+        $session = \Config\Services::session();
+
+        $user = $session->get('user');
+
+        $query = $this->db->query('SELECT u.birthdate, u.nick, u.name, u.lastname, u.image, u.id, u.email FROM users u JOIN author_client ac ON u.id=ac.client_id WHERE ac.author_id="' . $user['id'] . '"');
+
+        return $query->getResultArray();
+    }
 }

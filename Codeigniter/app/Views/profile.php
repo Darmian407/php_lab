@@ -239,6 +239,8 @@
 
                 <?= form_close() ?>
             </div>
+
+            <a class="uk-text-center uk-button uk-button-default" href="/followers/<?=$user['id']?>">Seguidores</a>
         </div>
 
     </div>

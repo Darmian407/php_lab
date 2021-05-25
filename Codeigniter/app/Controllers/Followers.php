@@ -17,4 +17,14 @@ class Followers extends BaseController
 
     }
 
+    public function followers(){
+
+        $userModel = new \App\Models\UserModel();
+
+        $data = $userModel->followers();
+
+        return view('followers', ['data' => $data]);
+
+    }
+
 }
