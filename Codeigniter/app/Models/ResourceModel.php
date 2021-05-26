@@ -93,4 +93,15 @@ class ResourceModel extends Model
         return [];
  
     }
+
+    public function getFavourites(){
+
+        $session = \Config\Services::session();
+
+        $user = $session->get('user');
+
+        $result = $this->db->query('SELECT r.image AS image, r.description, r.filename, r.id AS resourceId, r.downloadable, r.name, t.name AS type, u.name AS author, u.id AS authorId FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id JOIN favourites f ON r.id=f.resource_id WHERE user_id = ("' . $user['id'] . '")');
+
+        return $result->getResultArray();
+    }
 }

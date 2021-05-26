@@ -79,4 +79,14 @@ class Playlist extends BaseController
         echo 'Agregado recurso exitosamente';
     }
 
+    public function add_favourite($resource_id){
+                     
+        // Playlist model
+        $playlistModel = new \App\Models\playlistModel();
+
+        $playlistModel->insertResourceFavourites($resource_id);
+
+        echo 'Agregado recurso exitosamente';
+    }
+
 }

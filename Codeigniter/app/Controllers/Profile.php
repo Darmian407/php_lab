@@ -17,8 +17,16 @@ class Profile extends BaseController
 		
 		$user = $session->get('user');
 
+		$resourceModel = new \App\Models\ResourceModel();
+
+        $types = $resourceModel->getTypes();
+
+        $result = $resourceModel->getFavourites();
+
 		$data = [
-			'user' => $user
+			'user' => $user,
+			'result' => $result,
+			'types' => $types
 		];
 		
 		return view('profile', $data);

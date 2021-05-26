@@ -66,6 +66,7 @@ $routes->get('/buscar_autor/(:num)', 'Resource::buscar_autor/$1');
 $routes->get('/buscar_recursos_autor/(:num)', 'Resource::buscar_autor/$1');
 
 $routes->post('/addToLista/(:num)', 'Playlist::agregar_RecursoLista/$1');
+$routes->get('/add_favourite/(:num)', 'Playlist::add_favourite/$1');
 
 /*
  * --------------------------------------------------------------------

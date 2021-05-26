@@ -7,157 +7,59 @@
 <!--Web-->
 <div class="uk-grid-medium uk-visible@s uk-child-width-expand@s uk-text-center uk-height-viewport" uk-grid>
 
-    <div>
-        <div class="uk-card uk-card uk-card-body uk-text-center ">
-            <h1>Recursos guardados</h1>
+    <?php
+    if (!empty($result)) {
+    ?>
+
+        <div class="uk-card uk-card uk-card-body uk-text-center uk-height-viewport">
+            <h1>Recursos Guardados</h1>
             <div uk-filter="target: .js-filter">
 
                 <ul class="uk-subnav uk-subnav-pill">
+
                     <li class="uk-active" uk-filter-control><a href="#">Todos</a></li>
-                    <li uk-filter-control="[data-color='white']"><a href="#">Documentos</a></li>
-                    <li uk-filter-control="[data-color='blue']"><a href="#">Audiolibros</a></li>
-                    <li uk-filter-control="[data-color='black']"><a href="#">Libros</a></li>
+                    <?php
+
+                    if (!empty($types)) {
+                        foreach ($types as $type) {
+                    ?>
+                            <li uk-filter-control="[type='<?= $type['name'] ?>']"><a href="#"><?= $type['name'] ?></a></li>
+
+                    <?php
+                        }
+                    }
+                    ?>
                 </ul>
 
                 <ul class="js-filter uk-child-width-1-2 uk-child-width-1-3@m uk-text-center" uk-grid>
-
-                    <li data-color="white">
-                        <div class="uk-card uk-card-default uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li data-color="blue">
-                        <div class="uk-card uk-card-primary uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li data-color="white">
-                        <div class="uk-card uk-card-default uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li data-color="white">
-                        <div class="uk-card uk-card-default uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li data-color="black">
-                        <div class="uk-card uk-card-secondary uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li data-color="black">
-                        <div class="uk-card uk-card-secondary uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li data-color="blue">
-                        <div class="uk-card uk-card-primary uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li data-color="black">
-                        <div class="uk-card uk-card-secondary uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                    <?php
+                    if (!empty($result)) {
+                        foreach ($result as $recurso) {
+                    ?>
+                            <li type="<?= $recurso['type'] ?>">
+                                <div class="uk-card uk-card-default uk-card-body">
+                                    <ul uk-accordion>
+                                        <li class="uk-close">
+                                            <a class="uk-accordion-title" href="#"><?= $recurso['name'] ?></a>
+                                            <div class="uk-accordion-content">
+                                                <p><?= $recurso['description'] ?></p>
+                                                <a class="uk-button uk-button-default" href="/buscar_id/<?= $recurso['resourceId'] ?>">Detalles</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                    <?php
+                        }
+                    }
+                    ?>
 
                 </ul>
-
             </div>
-
         </div>
-    </div>
-
+        <?php
+    }
+    ?>
     <div>
 
         <div class="uk-card uk-card-secondary uk-margin-left">
