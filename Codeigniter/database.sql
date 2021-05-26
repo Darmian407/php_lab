@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-05-2021 a las 20:58:19
+-- Tiempo de generación: 26-05-2021 a las 21:40:35
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -38,6 +38,24 @@ CREATE TABLE `authors` (
 
 INSERT INTO `authors` (`user_id`, `bibliography`) VALUES
 (2, '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `author_client`
+--
+
+CREATE TABLE `author_client` (
+  `author_id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `author_client`
+--
+
+INSERT INTO `author_client` (`author_id`, `client_id`) VALUES
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -81,23 +99,45 @@ INSERT INTO `clients` (`user_id`, `subscribed`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `favourites`
+--
+
+CREATE TABLE `favourites` (
+  `user_id` int(11) NOT NULL,
+  `resource_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `favourites`
+--
+
+INSERT INTO `favourites` (`user_id`, `resource_id`) VALUES
+(1, 1),
+(1, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `playlist`
 --
 
 CREATE TABLE `playlist` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `public` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `playlist`
 --
 
-INSERT INTO `playlist` (`id`, `user_id`, `name`) VALUES
-(1, 1, '0'),
-(2, 1, '0'),
-(3, 1, 'Coso');
+INSERT INTO `playlist` (`id`, `user_id`, `name`, `public`) VALUES
+(3, 1, 'Coso', 0),
+(4, 1, 'Audiolibros', 0),
+(5, 1, 'Documentos', 0),
+(7, 1, 'Canciones', 1),
+(8, 1, 'Documentos publicos', 1);
 
 -- --------------------------------------------------------
 
@@ -115,8 +155,10 @@ CREATE TABLE `playlist_resource` (
 --
 
 INSERT INTO `playlist_resource` (`playlist_id`, `resource_id`) VALUES
-(1, 1),
-(3, 1);
+(3, 1),
+(3, 2),
+(4, 1),
+(8, 2);
 
 -- --------------------------------------------------------
 
@@ -141,7 +183,8 @@ CREATE TABLE `resources` (
 --
 
 INSERT INTO `resources` (`id`, `name`, `description`, `type`, `downloadable`, `image`, `author`, `subscription`, `filename`) VALUES
-(1, 'Mi libro', 'Luna de pluton', 1, 0, 'https://www.planetadelibros.com.uy/usuaris/libros/fotos/298/m_libros/297716_portada_luna-de-pluton_dross_201902181611.jpg', 2, 0, '1621955012_4475d006961e68e1ce26.pdf');
+(1, 'Mi libro', 'Luna de pluton', 1, 0, 'https://www.planetadelibros.com.uy/usuaris/libros/fotos/298/m_libros/297716_portada_luna-de-pluton_dross_201902181611.jpg', 2, 0, '1621955012_4475d006961e68e1ce26.pdf'),
+(2, 'La Evolucion de Grafiti', 'Un vistazo a los artistas del grafiti alrededor del mundo', 1, 0, 'https://static-cse.canva.com/blob/439115/1003w-MYrzl9YfaWU.jpg', 2, 0, '1621970408_d722a8f2e3142c666a59.pdf');
 
 -- --------------------------------------------------------
 
@@ -159,7 +202,8 @@ CREATE TABLE `resource_categories` (
 --
 
 INSERT INTO `resource_categories` (`resource_id`, `category_id`) VALUES
-(1, 3);
+(1, 3),
+(2, 3);
 
 -- --------------------------------------------------------
 
@@ -220,6 +264,13 @@ ALTER TABLE `authors`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indices de la tabla `author_client`
+--
+ALTER TABLE `author_client`
+  ADD PRIMARY KEY (`author_id`,`client_id`),
+  ADD KEY `client_id` (`client_id`);
+
+--
 -- Indices de la tabla `categories`
 --
 ALTER TABLE `categories`
@@ -232,6 +283,13 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `clients`
   ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indices de la tabla `favourites`
+--
+ALTER TABLE `favourites`
+  ADD PRIMARY KEY (`user_id`,`resource_id`),
+  ADD KEY `resource_id` (`resource_id`);
 
 --
 -- Indices de la tabla `playlist`
@@ -291,13 +349,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `playlist`
 --
 ALTER TABLE `playlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `resources`
 --
 ALTER TABLE `resources`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `types`
@@ -322,6 +380,13 @@ ALTER TABLE `authors`
   ADD CONSTRAINT `author_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `author_client`
+--
+ALTER TABLE `author_client`
+  ADD CONSTRAINT `author_client_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `authors` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `author_client_ibfk_2` FOREIGN KEY (`client_id`) REFERENCES `clients` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `categories`
 --
 ALTER TABLE `categories`
@@ -332,6 +397,13 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `clients`
   ADD CONSTRAINT `client_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Filtros para la tabla `favourites`
+--
+ALTER TABLE `favourites`
+  ADD CONSTRAINT `favourites_ibfk_1` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `favourites_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `clients` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `playlist`

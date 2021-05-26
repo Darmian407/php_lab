@@ -16,11 +16,25 @@ class PlaylistModel extends Model
     // This setting allows you to define the type of data that is returned.
     protected $returnType = 'array';
 
-    protected $allowedFields = ['user_id', 'name'];
+    protected $allowedFields = ['user_id', 'name', 'public'];
 
     public function getPlaylists($user_id){
 
         $result = $this->db->query('SELECT id , name FROM playlist WHERE user_id = ("' . $user_id . '")');
+
+        return $result->getResultArray();
+    }
+
+    public function getPublicPlaylists($user_id){
+
+        $result = $this->db->query('SELECT id , name FROM playlist WHERE user_id = ("' . $user_id . '") AND public = true');
+
+        return $result->getResultArray();
+    }
+
+    public function getResourceFromPlaylist($playlist_id){
+
+        $result = $this->db->query ( 'SELECT * FROM resources r JOIN playlist_resource p ON p.resource_id = r.id WHERE p.playlist_id = ("' . $playlist_id . '")');
 
         return $result->getResultArray();
     }

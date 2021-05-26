@@ -9,159 +9,34 @@
             <button class="uk-button uk-button-primary uk-margin-small-right" type="button" uk-toggle="target: #my-id">Open</button>
         </div>
         <ul uk-accordion>
-            <li class="uk-close">
-                <a class="uk-accordion-title" href="#"><h3>Novelas</h3></a>
-                <div class="uk-accordion-content">
-                    <div class="uk-child-width-expand@s uk-text-center" uk-grid>
-                        <div class="uk-card uk-card-default uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
+            <?php
+                if(!empty($playlists)){
+                    foreach($playlists as $playlist){
+                    ?>
+                    <li class="uk-close">
+                        <a class="uk-accordion-title" href="#"><h3><?= $playlist['name'] ?></h3></a>
+                        <div class="uk-accordion-content">
+                            <div class="uk-child-width-expand@s uk-text-center" uk-grid>
+                                <?php 
+                                    foreach($playlist['resources'] as $resource){
+                                ?>
+                                    <div class="uk-card uk-card-default uk-card-body">
+                                        <ul uk-accordion>
+                                            <li class="uk-close">
+                                                <a class="uk-accordion-title" href="#"><?= $resource['name']?></a>
+                                                <div class="uk-accordion-content">
+                                                    <p><?= $resource['description']?></p>
+                                                    <button class="uk-button uk-button-default">Detalles</button>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </li>
-                            </ul>
+                                <?php }?>
+                            </div>
                         </div>
-
-                        <div class="uk-card uk-card-default uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="uk-card uk-card-default uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a class="uk-accordion-title" href="#"><h3>Partituras Rock</h3></a>
-                <div class="uk-accordion-content">
-                    <div class="uk-child-width-expand@s uk-text-center" uk-grid>
-                        <div class="uk-card uk-card-default uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="uk-card uk-card-default uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="uk-card uk-card-default uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a class="uk-accordion-title" href="#"><h3>Podcasts</h3></a>
-                <div class="uk-accordion-content">
-                    <div class="uk-child-width-expand@s uk-text-center" uk-grid>
-                        <div class="uk-card uk-card-default uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="uk-card uk-card-primary uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="uk-card uk-card-secondary uk-card-body">
-                            <ul uk-accordion>
-                                <li class="uk-close">
-                                    <a class="uk-accordion-title" href="#">Item 1</a>
-                                    <div class="uk-accordion-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor
-                                            incididunt
-                                            ut labore et dolore magna aliqua .</p>
-                                        <button class="uk-button uk-button-default">Detalles</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
+                    </li>
+            <?php }
+            }?>
         </ul>
 
     </div>

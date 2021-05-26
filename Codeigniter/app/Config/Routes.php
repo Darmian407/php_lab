@@ -49,7 +49,11 @@ $routes->post('/register', 'Register::receiveData');
 $routes->get('/profile', 'Profile::index', ['as' => 'profile']);
 
 $routes->get('/listas_visualizacion', 'Profile::listas_visualizacion', ['as' => 'listas_visualizacion']);
+$routes->get('/listas_visualizacion/(:num)', 'Profile::listas_other_user/$1');
+
 $routes->post('/listas_visualizacion/addLista', 'Playlist::agregar_lista');
+$routes->post('/addToLista/(:num)', 'Playlist::agregar_RecursoLista/$1');
+
 
 $routes->get('/follow/(:num)', 'Followers::follow/$1');
 $routes->get('/followers/(:num)', 'Followers::followers/$1');
@@ -65,7 +69,6 @@ $routes->get('/buscar_todo', 'Resource::buscar_todo');
 $routes->get('/buscar_autor/(:num)', 'Resource::buscar_autor/$1');
 $routes->get('/buscar_recursos_autor/(:num)', 'Resource::buscar_autor/$1');
 
-$routes->post('/addToLista/(:num)', 'Playlist::agregar_RecursoLista/$1');
 $routes->get('/add_favourite/(:num)', 'Playlist::add_favourite/$1');
 
 /*

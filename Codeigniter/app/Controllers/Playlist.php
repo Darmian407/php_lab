@@ -45,15 +45,23 @@ class Playlist extends BaseController
 
             // Get parametters from http request
             $name = $request->getVar('name');
+            $public = $request->getVar('public');
 
             // Bring model to the controller
             $playlistModel = new \App\Models\PlaylistModel();
 
             $user = $session->get('user');
 
+            if($public){
+                $public = true;
+            }else{
+                $public = false;
+            }
+
             $data = [
                 'user_id' => $user['id'],
-                'name' => $name
+                'name' => $name,
+                'public' => $public
             ];
 
             $playlistModel->insert($data);

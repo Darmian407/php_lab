@@ -29,6 +29,8 @@
                         }
                     }
                     ?>
+                    <li uk-filter-control><a href="/listas_visualizacion/<?=$user['id']?>">Listas</a></li>
+
                 </ul>
 
                 <ul class="js-filter uk-child-width-1-2 uk-child-width-1-3@m uk-text-center" uk-grid>
