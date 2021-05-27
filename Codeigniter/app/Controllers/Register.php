@@ -27,6 +27,24 @@ class Register extends BaseController
         // Validaton Service
         $validation =  \Config\Services::validation();
 
+        // Request Service
+        $request = service('request');
+
+        // Get parametters from http request
+        $email = $request->getVar('email');
+        $name = $request->getVar('name');
+        $lastName = $request->getVar('lastName');
+
+        $birthDateInput = date_create($request->getVar('birthDate'));
+        $birthDate =  date_format($birthDateInput, 'Y-m-d');
+
+        $nick = $request->getVar('nick');
+        $password = $request->getVar('password');
+        $autor = $request->getVar('autor');
+
+        $image = $request->getVar('image');
+        $biography = $request->getVar('biography');
+
         $rules = [
             'email' => [
                 'label' => 'Email',
@@ -67,6 +85,25 @@ class Register extends BaseController
             ]
         ];
 
+        if($autor){
+            $rules['image'] = [
+                'label' => 'Image URL',
+                'rules' => 'required|valid_url'
+            ];
+
+            $rules['biography'] = [
+                'label' => 'Biography',
+                'rules' => 'required'
+            ];
+        } else {
+            if(!empty($image)) {
+                $rules['image'] = [
+                    'label' => 'Image URL',
+                    'rules' => 'valid_url'
+                ];
+            }
+        }
+
         if (!$this->validate($rules)) {
 
             $data = [
@@ -79,25 +116,10 @@ class Register extends BaseController
             // Session Service
             $session = \Config\Services::session();
 
-            // Request Service
-            $request = service('request');
-
-            // Get parametters from http request
-            $email = $request->getVar('email');
-            $name = $request->getVar('name');
-            $lastName = $request->getVar('lastName');
-
-            $birthDateInput = date_create($request->getVar('birthDate'));
-            $birthDate =  date_format($birthDateInput, 'Y-m-d');
-
-            $nick = $request->getVar('nick');
-            $password = $request->getVar('password');
-            $autor = $request->getVar('autor');
-
             // Bring model to the controller
             $userModel = new \App\Models\UserModel();
 
-            $newUser = $userModel->insert_user($email, $name, $lastName, $nick, $password, $autor, $birthDate);
+            $newUser = $userModel->insert_user($email, $name, $lastName, $nick, $password, $autor, $birthDate, $image, $biography);
 
             $data = [
                 'user' => [

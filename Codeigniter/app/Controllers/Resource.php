@@ -116,7 +116,7 @@ class Resource extends BaseController
             $resourceModel->insertResource($tipo, $descargable, $imagen, $nombre, $descripcion, $user['id'], $categories, $file->getName());
         }
     }
-    
+
     public function buscar_recurso()
     {
         $request = service('request');
@@ -137,7 +137,6 @@ class Resource extends BaseController
         $result = $resourceModel->buscar_tipos($idType);
 
         return view('Resources/slider_recurso', ['result' => $result]);
-        
     }
 
     public function buscar_id($idResource)
@@ -159,15 +158,12 @@ class Resource extends BaseController
 
         $autor = $resourceModel->buscar_autor($idAutor);
 
-		$data = [
-			'result' => $result,
-			'types' => $types,
+        $data = [
+            'result' => $result,
+            'types' => $types,
             'autor' => $autor
+        ];
 
-		];
-        
-		return view('Resources/recursos_autor', $data);
-
+        return view('Resources/recursos_autor', $data);
     }
-
 }

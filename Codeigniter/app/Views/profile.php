@@ -4,6 +4,12 @@
 <!-- NavBar -->
 <?php echo view('templates/nav') ?>
 
+<?php
+$session = \Config\Services::session();
+
+$user = $session->get('user');
+?>
+
 <!--Web-->
 <div class="uk-grid-medium uk-visible@s uk-child-width-expand@s uk-text-center uk-height-viewport" uk-grid>
 
@@ -29,7 +35,7 @@
                         }
                     }
                     ?>
-                    <li uk-filter-control><a href="/listas_visualizacion/<?=$user['id']?>">Listas</a></li>
+                    <li uk-filter-control><a href="/listas_visualizacion/<?= $user['id'] ?>">Listas</a></li>
 
                 </ul>
 
@@ -59,14 +65,15 @@
                 </ul>
             </div>
         </div>
-        <?php
+
+    <?php
     }
     ?>
-    <div>
 
+    <div>
         <div class="uk-card uk-card-secondary uk-margin-left">
             <div class="uk-card-body">
-                
+
                 <h3 class="uk-card-title">Datos del <?= $user['DTYPE'] ?></h3>
 
                 <img class="uk-border-rounded uk-margin-small" data-src="https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png" width="300px" height="" alt="" uk-img>
@@ -144,7 +151,7 @@
                 <?= form_close() ?>
             </div>
 
-            <a class="uk-text-center uk-button uk-button-default" href="/followers/<?=$user['id']?>">Seguidores</a>
+            <a class="uk-text-center uk-button uk-button-default" href="/followers/<?= $user['id'] ?>">Seguidores</a>
         </div>
 
     </div>

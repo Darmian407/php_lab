@@ -79,12 +79,35 @@
                     'value' => set_value('confirmPassword')
                 );
 
+                $image = array(
+                    'name' => 'image',
+                    'id' => 'image',
+                    'class' => 'uk-input uk-margin-small uk-padding-small uk-border-pill ' . ((isset($errors) && array_key_exists('image', $errors)) ? "uk-form-danger" : ""),
+                    'type' => 'text',
+                    'placeholder' => 'Enter Image URL',
+                    'value' => set_value('image')
+                );
+
                 $autor = array(
                     'name' => 'autor',
                     'id' => 'autor',
                     'class' => 'uk-checkbox uk-border-rounded',
                     'type' => 'checkbox',
-                    'value' => 'true'
+                    'value' => 'true',
+                );
+
+                if(set_value('autor')){
+                    $autor[' checked'] = '';
+                }
+
+                $biography = array(
+                    'name' => 'biography',
+                    'id' => 'biography',
+                    'class' => 'uk-textarea uk-border-rounded uk-margin-small uk-padding-small ' . ((isset($errors) && array_key_exists('biography', $errors)) ? "uk-form-danger" : ""),
+                    'rows' => '4',
+                    'placeholder' => 'Enter your Biography',
+                    'value' => set_value('biography')
+
                 );
 
                 $submit = array(
@@ -108,9 +131,13 @@
 
                 <?= form_input($confirmPassword) ?>
 
+                <?= form_input($image) ?>
+
                 <div class="uk-margin-small">
                     <label for="autor"><?= form_checkbox($autor) ?> Register as Autor</label>
                 </div>
+
+                <?= form_textarea($biography) ?>
 
                 <?= form_button($submit, 'Send') ?>
 
@@ -124,6 +151,23 @@
         </div>
     </div>
 </div>
+
+<script> 
+    let biography = document.getElementById('biography');
+    let autor = document.getElementById('autor');
+
+    if(!autor.checked){
+        biography.style.display = 'none';
+    }
+
+    autor.addEventListener("click", (event) => {
+        if(biography.style.display === 'none'){
+            biography.style.display = 'block';
+        } else {
+            biography.style.display = 'none';
+        }
+    });
+</script>
 
 <!-- Footer Template -->
 <?php echo view('templates/footer') ?>

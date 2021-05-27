@@ -1,5 +1,9 @@
 <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+    <?php
+    $session = \Config\Services::session();
 
+    $user = $session->get('user');
+    ?>
     <nav class="uk-navbar-container" uk-navbar>
 
         <div class="uk-navbar-left">

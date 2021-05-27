@@ -29,15 +29,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `authors` (
   `user_id` int(11) NOT NULL,
-  `bibliography` text COLLATE utf8_unicode_ci NOT NULL
+  `biography` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `authors`
 --
 
-INSERT INTO `authors` (`user_id`, `bibliography`) VALUES
-(2, '');
+INSERT INTO `authors` (`user_id`, `biography`) VALUES
+(2, 'fdklshafldhsajkfhdsjkafdlsak');
 
 -- --------------------------------------------------------
 

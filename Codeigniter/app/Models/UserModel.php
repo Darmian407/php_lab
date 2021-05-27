@@ -15,15 +15,15 @@ class UserModel extends Model
     // This setting allows you to define the type of data that is returned.
     protected $returnType = 'array';
 
-    public function insert_user($email, $name, $lastname, $nick, $password, $autor, $birthDate)
+    public function insert_user($email, $name, $lastname, $nick, $password, $autor, $birthDate, $image, $biography)
     {
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
-        $this->db->query('INSERT INTO users (email, nick, name, lastname, birthdate, password, DTYPE) VALUES ("' . $email . '","' . $nick . '","' . $name . '","' . $lastname . '","' . $birthDate . '","' . $hash . '"' . (($autor) ? ',"Autor")' : ',"Cliente")'));
+        $this->db->query('INSERT INTO users (email, nick, name, lastname, birthdate, password, image, DTYPE) VALUES ("' . $email . '","' . $nick . '","' . $name . '","' . $lastname . '","' . $birthDate . '","' . $hash . '","' . $image . '"' .(($autor) ? ',"Autor")' : ',"Cliente")'));
         $result = $this->find($email);
 
         if ($autor) {
-            $this->db->query('INSERT INTO authors (user_id) VALUES ("' . $result['id'] . '")');
+            $this->db->query('INSERT INTO authors (user_id, biography) VALUES ("' . $result['id'] . '","' . $biography . '")');
         } else {
             $this->db->query('INSERT INTO clients (user_id) VALUES ("' . $result['id'] . '")');
         }

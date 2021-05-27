@@ -6,18 +6,13 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		$session = \Config\Services::session();
-
-        $user = $session->get('user');
-
 		$resourceModel = new \App\Models\ResourceModel();
 
-        $result = $resourceModel->buscar_todo();
+		$result = $resourceModel->buscar_todo();
 
 		$types = $resourceModel->getTypes();
 
 		$data = [
-			'user' => $user,
 			'result' => $result,
 			'types' => $types
 		];
@@ -27,40 +22,16 @@ class Home extends BaseController
 
 	public function planes()
 	{
-		$session = \Config\Services::session();
-
-        $user = $session->get('user');
-
-		$data = [
-			'user' => $user
-		];
-
-		return view('planes', $data);
+		return view('planes');
 	}
 
 	public function success()
 	{
-		$session = \Config\Services::session();
-
-        $user = $session->get('user');
-
-		$data = [
-			'user' => $user
-		];
-
-		return view('paypal/success', $data);
+		return view('paypal/success');
 	}
 
 	public function onCancel()
 	{
-		$session = \Config\Services::session();
-
-        $user = $session->get('user');
-
-		$data = [
-			'user' => $user
-		];
-
-		return view('paypal/onCancel', $data);
+		return view('paypal/onCancel');
 	}
 }

@@ -13,10 +13,6 @@ class Profile extends BaseController
 
 	public function index()
 	{
-		$session = \Config\Services::session();
-		
-		$user = $session->get('user');
-
 		$resourceModel = new \App\Models\ResourceModel();
 
         $types = $resourceModel->getTypes();
@@ -24,7 +20,6 @@ class Profile extends BaseController
         $result = $resourceModel->getFavourites();
 
 		$data = [
-			'user' => $user,
 			'result' => $result,
 			'types' => $types
 		];
@@ -55,19 +50,12 @@ class Profile extends BaseController
 	}
 
 	public function listas_other_user($user_id){
-
-		// Session
-		$session = \Config\Services::session();
-
-		$user = $session->get('user');
-
 		// Playlist model
 		$playlistModel = new \App\Models\playlistModel();
   
 		$lists = $playlistModel->getPublicPlaylists($user_id);
 
 		$data = [
-			'user' => $user,
 			'playlists' => $lists
 		];
 		foreach($data['playlists'] as $key => $val){
