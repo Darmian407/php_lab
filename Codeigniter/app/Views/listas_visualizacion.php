@@ -5,7 +5,7 @@
 
 <div class="uk-margin-left uk-height-viewport">
         <div class="uk-margin-bottom uk-text-center">
-            <h1>Listas de visualizacion</h1>
+            <h1><?=$message?></h1>
             <button class="uk-button uk-button-primary uk-margin-small-right" type="button" uk-toggle="target: #my-id">Open</button>
         </div>
         <ul uk-accordion>

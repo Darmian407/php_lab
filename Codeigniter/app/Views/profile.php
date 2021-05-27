@@ -35,8 +35,6 @@ $user = $session->get('user');
                         }
                     }
                     ?>
-                    <li uk-filter-control><a href="/listas_visualizacion/<?= $user['id'] ?>">Listas</a></li>
-
                 </ul>
 
                 <ul class="js-filter uk-child-width-1-2 uk-child-width-1-3@m uk-text-center" uk-grid>
@@ -76,7 +74,7 @@ $user = $session->get('user');
 
                 <h3 class="uk-card-title">Datos del <?= $user['DTYPE'] ?></h3>
 
-                <img class="uk-border-rounded uk-margin-small" data-src="https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png" width="300px" height="" alt="" uk-img>
+                <img class="uk-border-rounded uk-margin-small" data-src="<?= $user['image']?>" width="300px" height="" alt="https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png" uk-img>
 
                 <?= form_open('') ?>
 
@@ -151,7 +149,15 @@ $user = $session->get('user');
                 <?= form_close() ?>
             </div>
 
-            <a class="uk-text-center uk-button uk-button-default" href="/followers/<?= $user['id'] ?>">Seguidores</a>
+            <?php
+            if($user['DTYPE'] == 'Autor'){
+            ?>
+                <a class="uk-text-center uk-button uk-button-default" href="/followers/<?= $user['id'] ?>">Seguidores</a>
+            <?php
+            } else{
+            ?>
+                <a class="uk-text-center uk-button uk-button-default" href="/listas_visualizacion/<?= $user['id'] ?>">Listas</a>
+            <?php } ?>
         </div>
 
     </div>

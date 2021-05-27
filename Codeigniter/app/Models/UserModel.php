@@ -67,4 +67,11 @@ class UserModel extends Model
 
         return $query->getResultArray();
     }
+
+    public function getUser($user_id){
+
+        $query = $this->db->query('SELECT nick FROM users WHERE id = "' . $user_id . '"');
+
+        return $query->getFirstRow('array');
+    }
 }

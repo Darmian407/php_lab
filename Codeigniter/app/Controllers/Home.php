@@ -22,7 +22,13 @@ class Home extends BaseController
 
 	public function planes()
 	{
-		return view('planes');
+		$categoryModel = new \App\Models\CategoryModel();
+
+		echo '<pre>';
+		var_dump($categoryModel->getCategories(null));
+		echo '</pre>';
+
+		//return view('planes');
 	}
 
 	public function success()

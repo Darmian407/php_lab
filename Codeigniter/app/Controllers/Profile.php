@@ -40,7 +40,9 @@ class Profile extends BaseController
 
 		$data = [
 			'user' => $user,
-			'playlists' => $lists
+			'playlists' => $lists,
+			'message' => 'Mis Listas'
+
 		];
 		foreach($data['playlists'] as $key => $val){
 			$data['playlists'][$key]['resources'] = $playlistModel->getResourceFromPlaylist($val['id']);
@@ -50,13 +52,18 @@ class Profile extends BaseController
 	}
 
 	public function listas_other_user($user_id){
+		
 		// Playlist model
 		$playlistModel = new \App\Models\playlistModel();
+
+		// User model
+		$userModel = new \App\Models\UserModel();
   
 		$lists = $playlistModel->getPublicPlaylists($user_id);
 
 		$data = [
-			'playlists' => $lists
+			'playlists' => $lists,
+			'message' => 'Listas de ' . $userModel->getUser($user_id)['nick']
 		];
 		foreach($data['playlists'] as $key => $val){
 			$data['playlists'][$key]['resources'] = $playlistModel->getResourceFromPlaylist($val['id']);

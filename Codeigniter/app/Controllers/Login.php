@@ -68,6 +68,7 @@ class Login extends BaseController
                     'lastName' => $user['lastname'],
                     'nick' => $user['nick'],
                     'birthDate' => $user['birthdate'],
+                    'image' => $user['image'],
                     'DTYPE' => $user['DTYPE']
                 ],
                 'loged' => true
