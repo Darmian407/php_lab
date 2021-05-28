@@ -83,7 +83,7 @@
                                 <li class="uk-close">
                                     <a class="uk-accordion-title" href="#"><?= $recurso['name'] ?></a>
                                     <div class="uk-accordion-content">
-                                        <p><?= $recurso['description'] ?></p>
+                                        <p><?= $recurso['author'] ?></p>
                                         <a class="uk-button uk-button-default" href="/buscar_id/<?= $recurso['id'] ?>">Detalles</a>
                                     </div>
                                 </li>
