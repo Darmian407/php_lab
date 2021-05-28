@@ -74,4 +74,16 @@ class UserModel extends Model
 
         return $query->getFirstRow('array');
     }
+
+    public function followed_authors(){
+
+        $session = \Config\Services::session();
+
+        $user = $session->get('user');
+
+        $query = $this->db->query('SELECT u.birthdate, u.nick, u.name, u.lastname, u.image, u.id AS authorId, u.email FROM users u JOIN author_client ac ON u.id=ac.author_id WHERE ac.client_id="' . $user['id'] . '"');
+
+        return $query->getResultArray();
+
+    }
 }

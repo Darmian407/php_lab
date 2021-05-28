@@ -58,7 +58,7 @@
                     ?>
 
                         <li><a class="uk-visible@s" href="/listas_visualizacion">Listas de visualización</a></li>
-                        <li><a class="uk-visible@s" href="#">Autores seguidos</a></li>
+                        <li><a class="uk-visible@s" href="/followed_authors/<?= $user['id'] ?>">Autores seguidos</a></li>
 
                     <?php
                     } else {
@@ -124,7 +124,7 @@
                     </li>
                     <li><a class="uk-margin-bottom" class="" href="/planes">Planes</a></li>
                     <li><a class="uk-margin-bottom" href="/listas_visualizacion">Listas de visualización</a></li>
-                    <li><a class="uk-margin-bottom" href="#">Autores seguidos</a></li>
+                    <li><a class="uk-margin-bottom" href="/autores_seguidos">Autores seguidos</a></li>
                     <li><a class="uk-margin-bottom" href="/perfil_usuario">Perfil</a></li>
                     <li><a class="uk-margin-bottom" href="/login">Iniciar Sesión</a></li>
                     <li><a class="uk-margin-bottom" href="/register">Registrarse</a></li>

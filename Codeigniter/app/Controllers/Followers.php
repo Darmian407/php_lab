@@ -27,4 +27,13 @@ class Followers extends BaseController
 
     }
 
+    public function followed_authors(){
+
+        $userModel = new \App\Models\UserModel();
+
+        $data = $userModel->followed_authors();
+
+        return view('autores_seguidos', ['data' => $data]);
+    }
+
 }

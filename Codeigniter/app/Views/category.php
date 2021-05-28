@@ -12,7 +12,7 @@
     }
 ?>
 
-<div class="uk-width-1-2@s uk-width-2-5@m">
+<div class="uk-width-1-2@s uk-width-2-5@m uk-height-viewport">
     <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
         <?php
         foreach ($categories as $category) {

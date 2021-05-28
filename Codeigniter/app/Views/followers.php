@@ -7,20 +7,21 @@
 
 <div class="uk-card uk-card-secondary uk-margin-left uk-height-viewport">
     <div class="uk-card">
+        <h1 class="uk-text-center">Seguidores</h1>
         <?php
         if (!empty($data)) {
             foreach ($data as $client) {
         ?>
-                <h3 class="uk-card-title">Datos de <?= $client['name'] ?> <?= $client['lastname'] ?></h3>
-
-                <img class="uk-border-rounded uk-margin-small" data-src="<?= $client['image'] ?>" width="300px" height="" alt="" uk-img>
-
-                <div class="uk-card uk-card-default uk-card">
-                    <li class="uk-margin-bottom">Nick: <?= $client['nick'] ?></li>
-                    <li class="uk-margin-bottom">Fecha de nacimiento: <?= $client['birthdate'] ?></li>
-                    <li class="uk-margin-bottom">Email: <?= $client['email'] ?></li>
-                </div>
-                
+                <ul uk-accordion>
+                        <li class="uk-close">
+                            <a class="uk-accordion-title" href="#"><?= $client['name'] ?> <?= $client['lastname'] ?></a>
+                            <div class="uk-accordion-content">
+                                <p class="uk-margin-bottom">Nick: <?= $client['nick'] ?></p>
+                                <p class="uk-margin-bottom">Fecha de nacimiento: <?= $client['birthdate'] ?></p>
+                                <p class="uk-margin-bottom">Email: <?= $client['email'] ?></p>
+                            </div>
+                        </li>
+                    </ul>
     </div>
 <?php
             }
