@@ -58,6 +58,7 @@ $routes->post('/addToLista/(:num)', 'Playlist::agregar_RecursoLista/$1');
 $routes->get('/follow/(:num)', 'Followers::follow/$1');
 $routes->get('/followers/(:num)', 'Followers::followers/$1');
 
+$routes->get('/categories', 'Categories::index', ['as' => 'categories']);
 
 // Resources routes
 $routes->get('/createResource', 'Resource::createResource', ['as' => 'createResource']);

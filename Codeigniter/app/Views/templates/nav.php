@@ -47,6 +47,7 @@
                 </li>
 
                 <li><a class="uk-visible@s" href="/planes">Planes</a></li>
+                <li><a class="uk-visible@s" href="/categories">Categories</a></li>
 
                 <?php
                 if (isset($user)) {

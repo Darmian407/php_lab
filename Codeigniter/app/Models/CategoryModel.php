@@ -17,23 +17,20 @@ class CategoryModel extends Model
     protected $returnType = 'array';
 
 
-    public function getCategories($father){
-
-        if($father){
-        $query = 'SELECT * FROM `categories` WHERE father = ("' . $father . '")';
+    public function getCategories($father)
+    {
+        if ($father) {
+            $query = 'SELECT * FROM `categories` WHERE father = ("' . $father . '")';
+        } else {
+            $query = 'SELECT * FROM `categories` WHERE father is NULL';
         }
-        else{
-        $query = 'SELECT * FROM `categories` WHERE father is NULL';
-        }
+        
         $result = $this->db->query($query)->getResultArray();
 
-        foreach($result as $key=>$category){
+        foreach ($result as $key => $category) {
             $result[$key]['child'] = $this->getCategories($category['name']);
         }
 
         return $result;
-
     }
-
-
 }
