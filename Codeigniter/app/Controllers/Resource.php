@@ -144,8 +144,17 @@ class Resource extends BaseController
         $resourceModel = new \App\Models\ResourceModel();
 
         $result = $resourceModel->buscar_id($idResource);
+        $message =  '<i class="fas fa-glasses"></i> Leer Vista Previa';
+        if($result['type'] == 'AudioLibro' || $result['type'] == 'Podcast' ){
+            $message = '<i class="fas fa-play"></i> Reproducir Muestra';
+        }
 
-        return view('Resources/resource_detail', ['result' => $result]);
+        $data = [
+            'result' => $result,
+            'message' => $message
+        ];
+
+        return view('Resources/resource_detail', $data);
     }
 
     public function buscar_autor($idAutor)

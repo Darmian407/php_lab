@@ -19,17 +19,10 @@ if (!empty($result)) {
                     <li class="uk-width-1-3  uk-text-center">
                         <div class=" uk-card uk-card-body">
                             <img data-src="<?= $result['image'] ?>" width="400" height="200" alt="" uk-img>
-                            <?php
-                            if ($result['type'] == 'Documento' || 'Libro' || 'Revista' ) {
-                            ?>
-                                <button class="uk-button uk-button-primary uk-margin-top uk-width-1-1"><i class="fas fa-glasses"></i> Leer vista previa</i></button>
-                            <?php
-                            } else {
-                            ?>
-                                <button class="uk-button uk-button-primary uk-margin-top .uk-width-1-1"><i class="fas fa-play"></i> Reproducir Muestra</i></button>
-                            <?php
-                            }
-
+                            
+                                <button class="uk-button uk-button-primary uk-margin-top uk-width-1-1"><?=$message?></i></button>
+                            
+                            <?php                          
                             if($user && $user['DTYPE'] == 'Cliente'){
                             ?>
                             <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="/add_favourite/<?= $result['id'] ?>"><i class="far fa-bookmark"></i> Guardar </i></a>

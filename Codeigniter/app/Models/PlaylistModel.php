@@ -41,8 +41,13 @@ class PlaylistModel extends Model
 
     public function insertResourceList($playlist_id, $resource_id)
     {
-        $this->db->query('INSERT INTO playlist_resource (playlist_id, resource_id) VALUES ("' . $playlist_id . '","' . $resource_id . '")');
+        $query = $this->db->query('SELECT resource_id FROM playlist_resource p WHERE p.playlist_id = ("' . $playlist_id . '") AND p.resource_id = ("' . $resource_id . '") ');
 
+        $validar = $query->getResultArray();
+
+        if(empty($validar)){
+        $this->db->query('INSERT INTO playlist_resource (playlist_id, resource_id) VALUES ("' . $playlist_id . '","' . $resource_id . '")');
+        }
     }
     
     public function insertResourceFavourites($resource_id)
