@@ -66,7 +66,7 @@ $routes->get('/createResource', 'Resource::createResource', ['as' => 'createReso
 $routes->post('/createResource', 'Resource::receiveData');
 $routes->post('/buscar_recurso', 'Resource::buscar_recurso');
 $routes->get('/buscar_tipo/(:alpha)', 'Resource::buscar_tipo/$1');
-$routes->get('/buscar_id/(:num)', 'Resource::buscar_id/$1');
+$routes->get('/buscar_id/(:num)', 'Resource::buscar_id/$1', ['as' => 'buscar_id']);
 $routes->get('/buscar_todo', 'Resource::buscar_todo');
 $routes->get('/buscar_autor/(:num)', 'Resource::buscar_autor/$1');
 $routes->get('/buscar_recursos_autor/(:num)', 'Resource::buscar_autor/$1');

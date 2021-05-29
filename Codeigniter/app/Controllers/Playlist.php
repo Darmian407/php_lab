@@ -66,7 +66,19 @@ class Playlist extends BaseController
 
             $playlistModel->insert($data);
 
-            return redirect('listas_visualizacion');
+            $lists = $playlistModel->getPlaylists($user['id']);
+
+            $data = [
+                'alert' => 
+                '<div class="uk-alert-success" uk-alert>
+                <a class="uk-alert-close" uk-close></a>
+                <p>Lista agregada exitosamente'.$name.' </p>
+                <a class="uk-button uk-button-default" href="/listas_visualizacion">Volver</a>
+                 </div>'
+                
+            ];
+            
+            return view('success', $data);
         }
     }
 
@@ -83,8 +95,17 @@ class Playlist extends BaseController
 
         $playlistModel->insertResourceList($playlist,$resource_id);
 
-        
-        echo 'Agregado recurso exitosamente';
+        $data = [
+            'alert' => 
+            '<div class="uk-alert-success" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>Recurso agregado a la lista '.$playlist.' exitosamente</p>
+            <a class="uk-button uk-button-default" href="/buscar_id/'.$resource_id.'">Volver</a>
+             </div>'
+            
+        ];
+        return view('success', $data);
+
     }
 
     public function add_favourite($resource_id){
@@ -94,7 +115,16 @@ class Playlist extends BaseController
 
         $playlistModel->insertResourceFavourites($resource_id);
 
-        echo 'Agregado recurso exitosamente';
+        $data = [
+            'alert' => 
+            '<div class="uk-alert-success" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>Recurso agregado a favoritos exitosamente</p>
+            <a class="uk-button uk-button-default" href="/buscar_id/'.$resource_id.'">Volver</a>
+             </div>'
+            
+        ];
+        return view('success', $data);    
     }
 
 }

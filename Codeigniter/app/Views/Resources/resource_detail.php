@@ -20,7 +20,7 @@ if (!empty($result)) {
                         <div class=" uk-card uk-card-body">
                             <img data-src="<?= $result['image'] ?>" width="400" height="200" alt="" uk-img>
                             
-                                <button class="uk-button uk-button-primary uk-margin-top uk-width-1-1"><?=$message?></i></button>
+                                <a class="uk-button uk-button-primary uk-margin-top uk-width-1-1" href="#modal-container" uk-toggle><?=$message?></i></a>
                             
                             <?php                          
                             if($user && $user['DTYPE'] == 'Cliente'){
@@ -52,7 +52,13 @@ if (!empty($result)) {
         </div>
     </div>
 
-
+    <div id="modal-container" class="uk-modal-container" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body" style="height: 100%;">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <h2 class="uk-modal-title">Vista Previa</h2>
+        <embed src="/uploads/<?=$result['filename']?>#toolbar=0&navpanes=0&scrollbar=0" style="width: 100%; height: 80%;">
+        </div>
+    </div>
     <?php
     if ($user && $user['DTYPE'] == 'Cliente') {
     ?>

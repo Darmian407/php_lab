@@ -4,7 +4,13 @@
 <?php echo view('templates/nav') ?>
 
 <div class="uk-margin-left uk-height-viewport">
-        <div class="uk-margin-bottom uk-text-center">
+        <div class="uk-margin-bottom uk-margin-top uk-text-center">
+            <?php
+                if(isset($alert)){
+                    echo $alert;
+                }
+            ?>
+            
             <h1><?=$message?></h1>
             <button class="uk-button uk-button-primary uk-margin-small-right" type="button" uk-toggle="target: #my-id">Open</button>
         </div>
