@@ -94,13 +94,20 @@ class ResourceModel extends Model
  
     }
 
-    public function getFavourites(){
-
+    public function getFavourites()
+    {
         $session = \Config\Services::session();
 
         $user = $session->get('user');
 
         $result = $this->db->query('SELECT r.image AS image, r.description, r.filename, r.id AS resourceId, r.downloadable, r.name, t.name AS type, u.name AS author, u.id AS authorId FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id JOIN favourites f ON r.id=f.resource_id WHERE user_id = ("' . $user['id'] . '")');
+
+        return $result->getResultArray();
+    }
+
+    public function buscar_recursos_categoria($idCategory)
+    {
+        $result = $this->db->query('SELECT r.image AS image, r.description, r.filename, r.id, r.downloadable, r.name, t.name AS type, u.name AS author, u.id AS authorId, c.name AS category FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id JOIN resource_categories rc ON rc.resource_id=r.id JOIN categories c ON rc.category_id=c.id WHERE category_id = ("' . $idCategory . '")');
 
         return $result->getResultArray();
     }

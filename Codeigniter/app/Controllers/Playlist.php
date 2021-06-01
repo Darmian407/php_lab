@@ -71,8 +71,7 @@ class Playlist extends BaseController
             $data = [
                 'alert' => 
                 '<div class="uk-alert-success" uk-alert>
-                <a class="uk-alert-close" uk-close></a>
-                <p>Lista agregada exitosamente'.$name.' </p>
+                <p>Lista '.$name.' agregada exitosamente </p>
                 <a class="uk-button uk-button-default" href="/listas_visualizacion">Volver</a>
                  </div>'
                 
@@ -118,7 +117,6 @@ class Playlist extends BaseController
         $data = [
             'alert' => 
             '<div class="uk-alert-success" uk-alert>
-            <a class="uk-alert-close" uk-close></a>
             <p>Recurso agregado a favoritos exitosamente</p>
             <a class="uk-button uk-button-default" href="/buscar_id/'.$resource_id.'">Volver</a>
              </div>'

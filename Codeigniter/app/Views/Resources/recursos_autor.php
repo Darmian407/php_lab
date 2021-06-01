@@ -11,7 +11,7 @@
     ?>
 
         <div class="uk-card uk-card uk-card-body uk-text-center uk-height-viewport">
-            <h1>Recursos del autor <?= $autor['author'] ?></h1>
+            <h1 class="">Recursos del autor <?= $autor['author'] ?></h1>
             <div uk-filter="target: .js-filter">
 
                 <ul class="uk-subnav uk-subnav-pill">
@@ -60,11 +60,8 @@
 
         <div class="uk-card uk-card-secondary uk-margin-left">
             <div class="uk-card-body">
-
-                <h3 class="uk-card-title">Datos de <?= $autor['author'] ?> <?= $autor['lastname'] ?></h3>
-
-                <img class="uk-border-rounded uk-margin-small" data-src="<?= $autor['authorImg'] ?>" width="300px" height="" alt="" uk-img>
-
+                <h3 class="uk-card-title uk-text-center">Datos de <?= $autor['author'] ?> <?= $autor['lastname'] ?></h3>
+                <img class="uk-border-rounded uk-margin-small" data-src="<?= $autor['authorImg'] ?>" width="" height="" alt="" uk-img>
                 <div class="uk-card uk-card-default uk-card-body">
                     <li class="uk-margin-bottom">Nombre: <?= $autor['author'] ?></li>
                     <hr class="uk-divider-small">

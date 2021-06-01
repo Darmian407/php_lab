@@ -70,6 +70,7 @@ $routes->get('/buscar_id/(:num)', 'Resource::buscar_id/$1', ['as' => 'buscar_id'
 $routes->get('/buscar_todo', 'Resource::buscar_todo');
 $routes->get('/buscar_autor/(:num)', 'Resource::buscar_autor/$1');
 $routes->get('/buscar_recursos_autor/(:num)', 'Resource::buscar_autor/$1');
+$routes->get('/buscar_recursos_categoria/(:num)', 'Resource::buscar_recursos_categoria/$1');
 
 $routes->get('/add_favourite/(:num)', 'Playlist::add_favourite/$1');
 

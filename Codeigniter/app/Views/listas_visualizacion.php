@@ -12,7 +12,7 @@
             ?>
             
             <h1><?=$message?></h1>
-            <button class="uk-button uk-button-primary uk-margin-small-right" type="button" uk-toggle="target: #my-id">Open</button>
+            <button class="uk-button uk-button-primary uk-margin-small-right" type="button" uk-toggle="target: #my-id">Agregar Lista</button>
         </div>
         <ul uk-accordion>
             <?php

@@ -114,7 +114,18 @@ class Resource extends BaseController
 
             // Persists the ingressed data into the database
             $resourceModel->insertResource($tipo, $descargable, $imagen, $nombre, $descripcion, $user['id'], $categories, $file->getName());
+
+            $data = [
+                'alert' => 
+                '<div class="uk-alert-success" uk-alert>
+                <p>Recurso creado exitosamente</p>
+                <a class="uk-button uk-button-default" href="/">Volver a Home</a>
+                 </div>'
+                
+            ];
+            return view('success', $data);
         }
+        
     }
 
     public function buscar_recurso()
@@ -174,5 +185,26 @@ class Resource extends BaseController
         ];
 
         return view('Resources/recursos_autor', $data);
+    }
+
+    public function buscar_recursos_categoria($idCategory)
+    {
+        $resourceModel = new \App\Models\ResourceModel();
+
+        $categoryModel = new \App\Models\CategoryModel();
+
+        $types = $resourceModel->getTypes();
+
+        $result = $resourceModel->buscar_recursos_categoria($idCategory);
+
+        $category = $categoryModel->find($idCategory);
+
+        $data = [
+            'result' => $result,
+            'types' => $types,
+            'category' => $category['name']
+        ];
+
+        return view('Resources/category_resources', $data);
     }
 }

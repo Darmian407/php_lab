@@ -12,11 +12,14 @@
         if (!empty($data)) {
             foreach ($data as $author) {
         ?>
-                
+
                 <div class="uk-card uk-card-secondary uk-card-body">
                     <ul uk-accordion>
                         <li class="uk-close">
-                            <a class="uk-accordion-title" href="#"><?= $author['name'] ?> <?= $author['lastname'] ?></a>
+                            <div class="uk-flex uk-accordion-title">
+                                <img class="uk-border-rounded uk-margin-small uk-margin-right" data-src="<?= $author['image'] ?>" width="50" height="70" alt="" uk-img>
+                                <a class="uk-accordion-title" href="#"><?= $author['name'] ?> <?= $author['lastname'] ?></a>
+                            </div>
                             <div class="uk-accordion-content">
                                 <p class="uk-margin-bottom">Fecha de nacimiento: <?= $author['birthdate'] ?></p>
                                 <p class="uk-margin-bottom">Email: <?= $author['email'] ?></p>
@@ -26,9 +29,9 @@
                     </ul>
                 </div>
 
-                
 
-    
+
+
         <?php
             }
         }

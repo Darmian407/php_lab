@@ -7,7 +7,7 @@
 
     <div class="uk-child-width-expand@l uk-text-center" uk-grid>
         <div id="precio" class="uk-card uk-card-body">
-            <h1>Subscribirse</h1>
+            <h1>Suscribirse</h1>
             <h3 class="uk-text-muted">Obtenga acceso todos los Documentos, Audiolibros, Libros, Podcasts, Revistas y Partituras</h3>
         </div>
     </div>

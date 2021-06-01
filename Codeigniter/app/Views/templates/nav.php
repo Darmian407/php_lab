@@ -8,7 +8,7 @@
 
         <div class="uk-navbar-left">
             <ul class="uk-navbar-nav">
-                <a class="uk-navbar-item uk-logo" href="/">Logo</a>
+                <a class="uk-navbar-item uk-logo" href="/">Scrivd</a>
             </ul>
         </div>
 
@@ -46,8 +46,8 @@
                     </div>
                 </li>
 
-                <li><a class="uk-visible@s" href="/planes">Planes</a></li>
-                <li><a class="uk-visible@s" href="/categories">Categories</a></li>
+                <li><a class="uk-visible@s" href="/planes">Suscribirse</a></li>
+                <li><a class="uk-visible@s" href="/categories">Categorias</a></li>
 
                 <?php
                 if (isset($user)) {
@@ -70,8 +70,8 @@
 
                     <li>
                         <a href="#"><?= $user['nick'] ?></a>
-                        <div class="uk-navbar-dropdown">
-                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <div class="uk-navbar-dropdown" uk-dropdown="mode: click">
+                            <ul class="uk-nav uk-navbar-dropdown-nav ">
                                 <li><a class="uk-visible@s" href="/profile">Perfil</a></li>
                                 <li><a class="uk-visible@s" href="/logout">Cerrar sesión</a></li>
                             </ul>

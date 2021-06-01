@@ -13,15 +13,18 @@
             foreach ($data as $client) {
         ?>
                 <ul uk-accordion>
-                        <li class="uk-close">
+                    <li class="uk-close">
+                        <div class="uk-flex uk-accordion-title">
+                            <img class="uk-border-rounded uk-margin-small uk-margin-right" data-src="<?= $client['image'] ?>" width="50" height="70" alt="" uk-img>
                             <a class="uk-accordion-title" href="#"><?= $client['name'] ?> <?= $client['lastname'] ?></a>
-                            <div class="uk-accordion-content">
-                                <p class="uk-margin-bottom">Nick: <?= $client['nick'] ?></p>
-                                <p class="uk-margin-bottom">Fecha de nacimiento: <?= $client['birthdate'] ?></p>
-                                <p class="uk-margin-bottom">Email: <?= $client['email'] ?></p>
-                            </div>
-                        </li>
-                    </ul>
+                        </div>
+                        <div class="uk-accordion-content">
+                            <p class="uk-margin-bottom">Nick: <?= $client['nick'] ?></p>
+                            <p class="uk-margin-bottom">Fecha de nacimiento: <?= $client['birthdate'] ?></p>
+                            <p class="uk-margin-bottom">Email: <?= $client['email'] ?></p>
+                        </div>
+                    </li>
+                </ul>
     </div>
 <?php
             }
