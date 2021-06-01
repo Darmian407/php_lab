@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-05-2021 a las 22:28:42
+-- Tiempo de generación: 01-06-2021 a las 21:54:02
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.5
 
@@ -117,7 +117,8 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`user_id`, `subscribed`) VALUES
-(1, 0);
+(1, 0),
+(4, 1);
 
 -- --------------------------------------------------------
 
@@ -136,7 +137,8 @@ CREATE TABLE `favourites` (
 
 INSERT INTO `favourites` (`user_id`, `resource_id`) VALUES
 (1, 1),
-(1, 2);
+(1, 2),
+(4, 1);
 
 -- --------------------------------------------------------
 
@@ -160,7 +162,9 @@ INSERT INTO `playlist` (`id`, `user_id`, `name`, `public`) VALUES
 (4, 1, 'Audiolibros', 0),
 (5, 1, 'Documentos', 0),
 (7, 1, 'Canciones', 1),
-(8, 1, 'Documentos publicos', 1);
+(8, 1, 'Documentos publicos', 1),
+(9, 1, 'Bienestar', 0),
+(12, 1, 'Libros', 0);
 
 -- --------------------------------------------------------
 
@@ -180,9 +184,20 @@ CREATE TABLE `playlist_resource` (
 INSERT INTO `playlist_resource` (`playlist_id`, `resource_id`) VALUES
 (3, 1),
 (3, 2),
+(3, 15),
 (4, 1),
 (4, 22),
-(8, 2);
+(8, 2),
+(9, 22),
+(12, 1),
+(12, 2),
+(12, 14),
+(12, 15),
+(12, 16),
+(12, 17),
+(12, 18),
+(12, 19),
+(12, 20);
 
 -- --------------------------------------------------------
 
@@ -232,7 +247,10 @@ INSERT INTO `resources` (`id`, `name`, `description`, `type`, `downloadable`, `i
 (25, 'Yo soy Eric Zimmerman vol II', 'Tras una boda y un viaje de novios de ensueño, mi vida con Judith comienza a normalizarse. Durante el día, mientras trabajo en mi empresa, mi maravillosa esposa sigue en sus trece de llevarme la contraria en todo lo que puede y más.\r\n\r\nA pesar de lo mucho que nos amamos, somos especialistas en enfadarnos y en reconciliarnos siempre… Pero un día llega a mis oídos un malicioso comentario contra ella que me hará perder la confianza en mi pequeña. Días liosos. Noches en vela. Discusiones. Problemas, muchos problemas.', 2, 0, 'https://imgv2-1-f.scribdassets.com/img/audiobook_square_badge/396213357/original/216x216/7e6af9d04e/1617039399?v=1', 2, 0, ''),
 (26, 'Diario de Ana Frank', 'Tras la invasión de Holanda, los Frank, comerciantes judíos alemanes emigrados a Amsterdam en 1933, se ocultaron de la Gestapo en una buhardilla anexa al edificio donde el padre de Ana tenía sus oficinas. Eran ocho personas y permanecieron recluidas desde junio de 1942 hasta agosto de 1944, fecha en que fueron detenidos y enviados a campos de concentración. En ese lugar y en las más precarias condiciones, Ana, a sus trece años, escribió su estremecedor Diario: un testimonio único en su género sobre el horror y la barbarie nazi, y sobre los sentimientos y experiencias de la propia Ana y sus acompañantes.', 2, 0, 'https://imgv2-1-f.scribdassets.com/img/audiobook_square_badge/353114834/original/216x216/c6b05b9498/1621303798?v=1', 2, 0, ''),
 (27, 'Historias para no dormir', 'Todas las semanas abrimos la caja de la media noche para narrar a ustedes la macabras historias que habitan en la oscuridad de la noche. Desde nuestros estudios en el callejón del aguacate llega el podcast de Historias para no dormir. Si quieres formar parte del podcast, por favor envíanos tus historias a histparanodormir@gmail.com. No te olvides de visitarnos en nuestras redes sociales y en nuestro blog.', 4, 0, 'https://imgv2-1-f.scribdassets.com/img/word_document/501663384/original/216x216/0a33a43599/1617654536?v=1', 3, 0, ''),
-(28, 'Startup Accelerator Programmes', 'This practice guide explains how accelerator programmes work and supports you to think practically about setting up your own programme.', 5, 0, 'https://imgv2-1-f.scribdassets.com/img/document/292143337/149x198/700be10530/1621432220?v=1', 3, 0, '');
+(28, 'Startup Accelerator Programmes', 'This practice guide explains how accelerator programmes work and supports you to think practically about setting up your own programme.', 5, 0, 'https://imgv2-1-f.scribdassets.com/img/document/292143337/149x198/700be10530/1621432220?v=1', 3, 0, ''),
+(29, 'El Club Del Terror', 'Un podcast de Podium no apto para miedosos', 2, 0, 'https://imgv2-1-f.scribdassets.com/img/word_document/500970635/original/216x216/9d573fb6b4/1618334022?v=1', 2, 0, ''),
+(30, 'Relatos de la Noche', 'En la tradición de los clásicos de la radio, aquí se cuentan las historias, relatos y leyendas que habitan las calles de México e Iberoamérica.', 4, 0, 'https://imgv2-2-f.scribdassets.com/img/word_document/500464517/original/216x216/df8aee6aca/1616792170?v=1', 2, 0, ''),
+(32, 'Señales Podcast\r\n', 'En Señales hablamos de todo lo que aterra a las personas, tanto Paranormal como Terrenal. Espíritus, Asesinos Seriales, Demonios, Aliens, Sectas y más. Desde Chihuahua, Mexico. www.senalespodcast.com', 4, 0, 'https://imgv2-2-f.scribdassets.com/img/word_document/463311772/original/216x216/d1a66f1563/1590625511?v=1', 2, 0, '');
 
 -- --------------------------------------------------------
 
@@ -275,7 +293,10 @@ INSERT INTO `resource_categories` (`resource_id`, `category_id`) VALUES
 (25, 9),
 (26, 7),
 (27, 9),
-(28, 1);
+(28, 1),
+(29, 23),
+(30, 23),
+(32, 7);
 
 -- --------------------------------------------------------
 
@@ -322,9 +343,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `lastname`, `email`, `password`, `nick`, `birthdate`, `image`, `DTYPE`) VALUES
-(1, 'Mauricio', 'Camacho', 'mauri3418@gmail.com', '$2y$10$6ZoFtMk4bm3lqAmqTPe3tOsNdlHa5PL5gu.UBvRWElwhUznu5tbEa', 'Oci', '2001-03-06', '', 'Cliente'),
-(2, 'Agustin', 'Peraza', 'agu458@gmail.com', '$2y$10$rRpOhLtX7SjT2xkoaeeT0OFWf8Qq7UIzjjETnTZ56jZny2.k0YlwK', 'Agu458', '2000-03-02', '', 'Autor'),
-(3, 'Santiago', 'Sellanes', 'santi@gmail.com', '$2y$10$z4FIz1TnpIwlnH9ARmC4FO4FMHH6aJliwWmm7F1ZshDeFNLpGebrK', 'Santi', '1998-06-24', 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80', 'Autor');
+(1, 'Mauricio', 'Camacho', 'mauri3418@gmail.com', '$2y$10$6ZoFtMk4bm3lqAmqTPe3tOsNdlHa5PL5gu.UBvRWElwhUznu5tbEa', 'Oci', '2001-03-06', 'https://cdn2.iconfinder.com/data/icons/avatars-99/62/avatar-370-456322-512.png', 'Cliente'),
+(2, 'Agustin', 'Peraza', 'agu458@gmail.com', '$2y$10$rRpOhLtX7SjT2xkoaeeT0OFWf8Qq7UIzjjETnTZ56jZny2.k0YlwK', 'Agu458', '2000-03-02', 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80', 'Autor'),
+(3, 'Santiago', 'Sellanes', 'santi@gmail.com', '$2y$10$z4FIz1TnpIwlnH9ARmC4FO4FMHH6aJliwWmm7F1ZshDeFNLpGebrK', 'Santi', '1998-06-24', 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80', 'Autor'),
+(4, 'Nicolas', 'Escobar', 'nico@mail.com', '$2y$10$Ua8CAlu.y2G7qwkBnSvoCOuNk5gjLc/HgR5IO41/EfnZgsWMIdzdi', 'Nico', '2000-01-01', 'https://d500.epimg.net/cincodias/imagenes/2016/07/04/lifestyle/1467646262_522853_1467646344_noticia_normal.jpg', 'Cliente');
 
 --
 -- Índices para tablas volcadas
@@ -422,13 +444,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `playlist`
 --
 ALTER TABLE `playlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `resources`
 --
 ALTER TABLE `resources`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `types`
@@ -440,7 +462,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
