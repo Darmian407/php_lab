@@ -60,7 +60,7 @@
 
         <div class="uk-card uk-card-secondary uk-margin-left">
             <div class="uk-card-body">
-                <h3 class="uk-card-title uk-text-center">Datos de <?= $autor['author'] ?> <?= $autor['lastname'] ?></h3>
+                <h1 class="uk-card-title uk-text-center">Datos de <?= $autor['author'] ?> <?= $autor['lastname'] ?></h1>
                 <img class="uk-border-rounded uk-margin-small" data-src="<?= $autor['authorImg'] ?>" width="" height="" alt="" uk-img>
                 <div class="uk-card uk-card-default uk-card-body">
                     <li class="uk-margin-bottom">Nombre: <?= $autor['author'] ?></li>
@@ -71,9 +71,22 @@
                     <hr class="uk-divider-small">
                     <li class="uk-margin-bottom">Fecha de nacimiento: <?= $autor['birthdate'] ?></li>
                     <hr class="uk-divider-small">
-                    <li class="uk-margin-bottom">Descripcion</li>
+                    <li class="uk-margin-bottom">Biografia: <?= $autor['biography'] ?></li>
                 </div>
-                <a class="uk-button uk-button-default uk-margin-top .uk-width-1-1" href="/follow/<?= $autor['authorId'] ?>"> Seguir </i></a>
+
+                <?php
+                if(!$following){
+                ?>
+                    <a class="uk-button uk-button-default uk-margin-top .uk-width-1-1" href="/follow/<?= $autor['authorId'] ?>"> Seguir </i></a>
+                <?php
+                }else{
+                ?>
+                    <a class="uk-button uk-button-default uk-margin-top .uk-width-1-1" href="/unfollow/<?= $autor['authorId'] ?>"> Dejar de seguir </i></a>
+                <?php
+                }
+                ?>
+                
+                
             </div>
 
         </div>

@@ -75,7 +75,7 @@ $user = $session->get('user');
 
                 <img class="uk-border-rounded uk-margin-small" data-src="<?= ($user['image'] ? $user['image'] : 'https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png' ) ?>" width="300px" height="" alt="" uk-img>
 
-                <?= form_open('') ?>
+                
 
                 <?php
 
@@ -106,6 +106,7 @@ $user = $session->get('user');
                     'type' => 'text',
                     'placeholder' => 'Enter Name',
                     'value' => $user['name'],
+                    'readonly' => '',
                 );
 
                 $lastName = array(
@@ -115,6 +116,7 @@ $user = $session->get('user');
                     'type' => 'text',
                     'placeholder' => 'Enter Lastname',
                     'value' => $user['lastName'],
+                    'readonly' => '',
                 );
 
                 $birthDate = array(
@@ -124,12 +126,10 @@ $user = $session->get('user');
                     'type' => 'date',
                     'placeholder' => 'Enter Birth Date',
                     'value' => $user['birthDate'],
+                    'readonly' => '',
                 );
 
-                $submit = array(
-                    'class' => 'uk-button uk-button-primary uk-width-1-1 uk-padding-small uk-text-large uk-margin-top',
-                    'type' => 'submit'
-                );
+               
 
                 ?>
 
@@ -143,9 +143,9 @@ $user = $session->get('user');
 
                 <?= form_input($birthDate) ?>
 
-                <?= form_button($submit, 'Update') ?>
+                
 
-                <?= form_close() ?>
+                
             </div>
 
             <?php
