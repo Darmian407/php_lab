@@ -84,6 +84,7 @@ class ResourceModel extends Model
         $result = $this->db->query('SELECT r.id, r.downloadable, t.name AS type, r.name, u.name AS author, r.image AS image, r.description, r.filename FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id ');
 
         return $result->getResultArray();
+ 
     }
 
     public function buscar_recursos_autor($idAutor)
@@ -91,11 +92,12 @@ class ResourceModel extends Model
         $result = $this->db->query('SELECT r.image AS image, r.description, r.filename, r.id, r.downloadable, r.name, t.name AS type, u.name AS author, u.id AS authorId FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id WHERE u.id = ("' . $idAutor . '")');
 
         return $result->getResultArray();
+ 
     }
 
     public function buscar_autor($idAutor)
     {
-        $query = $this->db->query('SELECT u.name AS author, u.birthdate, u.nick, u.id AS authorId, u.lastname AS lastname, u.image AS authorImg FROM users u WHERE u.id = ("' . $idAutor . '")');
+        $query = $this->db->query('SELECT u.name AS author, u.birthdate, u.nick, u.id AS authorId, u.lastname AS lastname, u.image AS authorImg, a.biography AS biography FROM users u JOIN authors a ON a.user_id=u.id WHERE u.id = ("' . $idAutor . '")');
 
         if ($query) {
             $result = $query->getFirstRow('array');
@@ -103,6 +105,7 @@ class ResourceModel extends Model
         }
 
         return [];
+ 
     }
 
     public function getFavourites()

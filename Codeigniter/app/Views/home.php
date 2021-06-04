@@ -11,31 +11,32 @@
 
             <ul class="uk-slideshow-items">
                 <li>
-                    <img src="https://i.ibb.co/3fcGhDL/Slider.png" alt="" uk-cover>
+                    <img src="https://i.postimg.cc/fWBbMQ1w/Sin-t-tulo-2.jpg" alt="" uk-cover>
                     <div class="uk-position-center uk-position-small uk-text-center uk-light">
-                        <h3 class="uk-margin-remove">Bottom</h3>
-                        <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <button class="uk-button uk-button-default">Leer más</button>
+                        <h3 class="uk-margin-remove uk-text-bold">Oferta de Invierno</h3>
+                        <p class="uk-margin-remove uk-text-bold">Subscribite y aprovecha esta oferta.</p>
+                        <a href="/planes" class="uk-button uk-button-default">Leer más</a>
                     </div>
 
                 </li>
                 <li>
-                    <img src="https://i.ibb.co/3fcGhDL/Slider.png" alt="" uk-cover>
+                    <img src="https://image.freepik.com/foto-gratis/libro-biblioteca-libro-texto-abierto_1150-5920.jpg" alt="" uk-cover>
                     <div class="uk-position-center uk-position-small uk-text-center uk-light">
-                        <h3 class="uk-margin-remove">Bottom</h3>
-                        <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <button class="uk-button uk-button-default">Leer más</button>
+                        <h3 class="uk-margin-remove uk-text-bold">Nuevos Libros 2021</h3>
+                        <p class="uk-margin-remove uk-text-bold">La mejor coleccion de libros del 2021 la encontras en Scrivd</p>
+                        <a href="/buscar_tipo/Libro" class="uk-button uk-button-default">Leer más</a>
                     </div>
                 </li>
                 <li>
-                    <img src="https://i.ibb.co/3fcGhDL/Slider.png" alt="" uk-cover>
+                    <img src="https://codigoesports.com/wp-content/uploads/2020/02/ibai-g2.jpg" alt="" uk-cover>
                     <div class="uk-position-center uk-position-small uk-text-center uk-light">
-                        <h3 class="uk-margin-remove">Bottom</h3>
-                        <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <button class="uk-button uk-button-default">Leer más</button>
+                        <h3 class="uk-margin-remove uk-text-bold">Charlando Tranquilamente</h3>
+                        <p class="uk-margin-remove uk-text-bold">El nuevo podcast de Ibai LLanos.</p>
+                        <!-- <a href="/buscar_recurso" class="uk-button uk-button-default">Leer más</a> Falta arreglar -->
                     </div>
                 </li>
             </ul>
+
 
             <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
             <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>

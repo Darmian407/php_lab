@@ -57,6 +57,34 @@ class UserModel extends Model
 
     }
 
+    public function following($authorId){
+
+        $session = \Config\Services::session();
+
+        $user = $session->get('user');
+
+        $query = $this->db->query('SELECT author_id, client_id FROM author_client WHERE author_id = "' . $authorId . '" AND client_id = "' . $user['id'] . '"' );
+
+        $validar = $query->getResultArray();
+
+        return  $validar?true:false;
+    }
+
+    public function unfollow($authorId){
+
+        $session = \Config\Services::session();
+
+        $user = $session->get('user');
+        
+        $validar = $this->following($authorId);
+
+        if($validar){
+            $this->db->query('DELETE FROM author_client WHERE author_id = ' . $authorId . ' AND client_id = ' . $user['id'] . '');
+            
+        }
+
+    }
+
     public function followers(){
 
         $session = \Config\Services::session();

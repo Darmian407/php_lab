@@ -15,6 +15,41 @@ class Followers extends BaseController
 
         $userModel->follow($authorId);
 
+        $session = \Config\Services::session();
+
+        $user = $session->get('user');
+
+        $data = [
+            'alert' => 
+            '<div class="uk-alert-success" uk-alert>
+            <p>Autor seguido exitosamente</p>
+            <a class="uk-button uk-button-default" href="/followed_authors/'.$user['id'].'">Ver autores seguidos</a>
+             </div>'
+            
+        ];
+        return view('success', $data);
+
+    }
+
+    public function unfollow($authorId)
+    {
+        $userModel = new \App\Models\UserModel();
+
+        $userModel->unfollow($authorId);
+
+        $session = \Config\Services::session();
+
+        $user = $session->get('user');
+
+        $data = [
+            'alert' => 
+            '<div class="uk-alert-success" uk-alert>
+            <p>Dejo de seguir al autor exitosamente</p>
+            <a class="uk-button uk-button-default" href="/followed_authors/'.$user['id'].'">Ver autores seguidos</a>
+             </div>'
+            
+        ];
+        return view('success', $data);
     }
 
     public function followers(){

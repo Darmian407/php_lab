@@ -197,20 +197,26 @@ class Resource extends BaseController
     {
         $resourceModel = new \App\Models\ResourceModel();
 
+        $userModel = new \App\Models\UserModel();
+
         $types = $resourceModel->getTypes();
 
         $result = $resourceModel->buscar_recursos_autor($idAutor);
 
         $autor = $resourceModel->buscar_autor($idAutor);
 
+        $following = $userModel->following($idAutor);
+
         $data = [
             'result' => $result,
             'types' => $types,
-            'autor' => $autor
+            'autor' => $autor,
+            'following' => $following
         ];
 
         return view('Resources/recursos_autor', $data);
     }
+
 
     public function buscar_recursos_categoria($idCategory)
     {
