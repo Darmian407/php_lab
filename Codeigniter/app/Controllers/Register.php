@@ -129,6 +129,7 @@ class Register extends BaseController
                     'lastName' => $newUser['lastname'],
                     'nick' => $newUser['nick'],
                     'birthDate' => $newUser['birthdate'],
+                    'image' => $newUser['image'],
                     'DTYPE' => $newUser['DTYPE']
                 ],
                 'loged' => true

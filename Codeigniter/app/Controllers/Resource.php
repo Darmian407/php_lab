@@ -31,10 +31,8 @@ class Resource extends BaseController
         };
 
         // Bring categories from database
-        $categories = $resourceModel->getCategories();
-        foreach ($categories as $category) {
-            $data['categories'][$category['id']] = $category['name'];
-        };
+        $categorieModel = new \App\Models\CategoryModel();
+        $data['categories'] = $categorieModel->getCategories(null);
 
         return view('Resources/createResource', $data);
     }
@@ -45,6 +43,18 @@ class Resource extends BaseController
         $validation =  \Config\Services::validation();
         // Bring model to the controller
         $resourceModel = new \App\Models\ResourceModel();
+        // Request Service
+        $request = service('request');
+
+        // Get parametters from http request
+        $tipo = $request->getVar('tipo');
+        $subscription = $request->getVar('subscription');
+        $descargable = $request->getVar('descargable');
+        $imagen = $request->getVar('imagen');
+        $nombre = $request->getVar('nombre');
+        $descripcion = $request->getVar('descripcion');
+        $categories = $request->getVar('categories');
+        $file = $request->getFile('file');
 
         // Rules for validation
         $rules = [
@@ -55,15 +65,37 @@ class Resource extends BaseController
 
             'nombre' => [
                 'label' => 'Nombre',
-                'rules' => 'required|alpha_numeric_space'
+                'rules' => 'required'
             ],
 
             'descripcion' => [
                 'label' => 'Descripción',
-                'rules' => 'required|alpha_numeric_space'
+                'rules' => 'required'
             ],
 
+            'imagen' => [
+                'label' => 'Imagen',
+                'rules' => 'required|valid_url'
+            ],
+
+            'categories' => [
+                'label' => 'Categorias',
+                'rules' => 'required'
+            ],
+
+            'file' => [
+                'label' => 'File',
+                'rules' => 'uploaded[file]'
+            ]
         ];
+
+        if($tipo === '2'){
+            $rules['file']['rules'] .= '|ext_in[file,mp3]';
+            $rules['file']['errors']['ext_in'] = 'Only allowed mp3 files';
+        } else {
+            $rules['file']['rules'] .= '|ext_in[file,pdf]';
+            $rules['file']['errors']['ext_in'] = 'Only allowed pdf files';
+        }
 
         if (!$this->validate($rules)) {
 
@@ -80,10 +112,8 @@ class Resource extends BaseController
             };
 
             // Bring categories from database
-            $categories = $resourceModel->getCategories();
-            foreach ($categories as $category) {
-                $data['categories'][$category['id']] = $category['name'];
-            };
+            $categorieModel = new \App\Models\CategoryModel();
+            $data['categories'] = $categorieModel->getCategories(null);
 
             return view('Resources/createResource', $data);
         } else {
@@ -91,20 +121,16 @@ class Resource extends BaseController
             $session = \Config\Services::session();
             $user = $session->get('user');
 
-            // Request Service
-            $request = service('request');
-
-            // Get parametters from http request
-            $tipo = $request->getVar('tipo');
-            $descargable = $request->getVar('descargable');
-            $imagen = $request->getVar('imagen');
-            $nombre = $request->getVar('nombre');
-            $descripcion = $request->getVar('descripcion');
-            $categories = $request->getVar('categories');
-            $file = $request->getFile('file');
-
             if (!$descargable) {
-                $descargable = false;
+                $descargable = 0;
+            } else {
+                $descargable = 1;
+            }
+
+            if (!$subscription) {
+                $subscription = 0;
+            } else {
+                $subscription = 1;
             }
 
             // Save file into the uploads folder in the public one if is valid and has not changed
@@ -113,19 +139,18 @@ class Resource extends BaseController
             }
 
             // Persists the ingressed data into the database
-            $resourceModel->insertResource($tipo, $descargable, $imagen, $nombre, $descripcion, $user['id'], $categories, $file->getName());
+            $resourceModel->insertResource($tipo, $descargable, $imagen, $nombre, $descripcion, $user['id'], $categories, $file->getName(), $subscription);
 
             $data = [
-                'alert' => 
+                'alert' =>
                 '<div class="uk-alert-success" uk-alert>
                 <p>Recurso creado exitosamente</p>
                 <a class="uk-button uk-button-default" href="/">Volver a Home</a>
                  </div>'
-                
+
             ];
             return view('success', $data);
         }
-        
     }
 
     public function buscar_recurso()
@@ -156,7 +181,7 @@ class Resource extends BaseController
 
         $result = $resourceModel->buscar_id($idResource);
         $message =  '<i class="fas fa-glasses"></i> Leer Vista Previa';
-        if($result['type'] == 'AudioLibro' || $result['type'] == 'Podcast' ){
+        if ($result['type'] == 'AudioLibro' || $result['type'] == 'Podcast') {
             $message = '<i class="fas fa-play"></i> Reproducir Muestra';
         }
 

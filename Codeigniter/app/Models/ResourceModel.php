@@ -35,15 +35,29 @@ class ResourceModel extends Model
         return $result->getResultArray();
     }
 
-    public function insertResource($tipo, $descargable, $imagen, $nombre, $descripcion, $autor, $categories, $fileName)
+    public function insertarPadres($recursoId, $categoryId)
     {
-        $this->db->query('INSERT INTO resources (name, description, type, downloadable, image, author, filename) VALUES ("' . $nombre . '","' . $descripcion . '","' . $tipo . '","' . $descargable . '","' . $imagen . '","' . $autor . '","' . $fileName . '")');
+        $validate = $this->db->query('SELECT * FROM resource_categories WHERE resource_id = "' . $recursoId . '" AND category_id = "' . $categoryId . '"')->getResultArray();
+        $category = $this->db->query('SELECT * FROM categories WHERE id = "' . $categoryId . '"')->getResultArray();
+
+        if (!$validate && $category) {
+            $this->db->query('INSERT INTO resource_categories (resource_id,category_id) VALUES ("' . $recursoId . '","' . $categoryId . '")');
+            if($category[0]['father']){
+                $categoryFather = $this->db->query('SELECT * FROM categories WHERE name = "' . $category[0]['father'] . '"')->getResultArray();
+                $this->insertarPadres($recursoId, $categoryFather[0]['id']);
+            }
+        }
+    }
+
+    public function insertResource($tipo, $descargable, $imagen, $nombre, $descripcion, $autor, $categories, $fileName, $subscription)
+    {
+        $this->db->query('INSERT INTO resources (name, description, type, downloadable, image, author, filename, subscription) VALUES ("' . $nombre . '","' . $descripcion . '","' . $tipo . '","' . $descargable . '","' . $imagen . '","' . $autor . '","' . $fileName . '","' . $subscription . '")');
 
         $query = $this->db->query('SELECT MAX(id) AS id FROM resources');
         $newId = $query->getResultArray();
 
-        foreach ($categories as $category) {
-            $this->db->query('INSERT INTO resource_categories (resource_id,category_id) VALUES ("' . $newId[0]['id'] . '","' . $category . '")');
+        foreach ($categories as $categoryId) {
+            $this->insertarPadres($newId[0]['id'], $categoryId);
         }
     }
 
@@ -70,7 +84,6 @@ class ResourceModel extends Model
         $result = $this->db->query('SELECT r.id, r.downloadable, t.name AS type, r.name, u.name AS author, r.image AS image, r.description, r.filename FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id ');
 
         return $result->getResultArray();
- 
     }
 
     public function buscar_recursos_autor($idAutor)
@@ -78,7 +91,6 @@ class ResourceModel extends Model
         $result = $this->db->query('SELECT r.image AS image, r.description, r.filename, r.id, r.downloadable, r.name, t.name AS type, u.name AS author, u.id AS authorId FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id WHERE u.id = ("' . $idAutor . '")');
 
         return $result->getResultArray();
- 
     }
 
     public function buscar_autor($idAutor)
@@ -91,7 +103,6 @@ class ResourceModel extends Model
         }
 
         return [];
- 
     }
 
     public function getFavourites()

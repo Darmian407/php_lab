@@ -42,7 +42,7 @@
                     'placeholder' => 'Enter Image URL',
                     'value' => set_value('imagen')
                 );
-
+                
                 $descargable = array(
                     'name' => 'descargable',
                     'id' => 'descargable',
@@ -51,8 +51,24 @@
                     'value' => 'true'
                 );
 
+                if(set_value('descargable')){
+                    $descargable[' checked'] = '';
+                }
+
+                $subscription = array(
+                    'name' => 'subscription',
+                    'id' => 'subscription',
+                    'class' => 'uk-checkbox uk-border-rounded',
+                    'type' => 'checkbox',
+                    'value' => 'true'
+                );
+
+                if(set_value('subscription')){
+                    $subscription[' checked'] = '';
+                }
+
                 $submit = array(
-                    'class' => 'uk-button uk-button-primary uk-border-pill uk-width-1-1 uk-padding-small uk-text-large uk-margin-top',
+                    'class' => 'uk-button uk-button-primary uk-border-pill uk-width-1-1 uk-padding-small uk-text-large',
                     'type' => 'submit'
                 );
 
@@ -66,16 +82,47 @@
 
                 <?= form_dropdown('tipo', $types, [], ['class' => 'uk-select uk-margin-small uk-border-pill']) ?>
 
-                <?= form_multiselect('categories[]', $categories, [], ['class' => 'uk-select uk-margin-small uk-border-rounded']) ?>
+                <?php
+                function printChildCategories($categories)
+                {
+                    return array_map(function ($category) {
+                        return '<li><label><input class="uk-checkbox uk-border-rounded" type="checkbox" name="categories[]" value="' . $category['id'] . '"> ' . $category['name'] . '</label><ul>' . implode(" ", printChildCategories($category['child'])) . '</ul></li>';
+                    }, $categories);
+                }
+                ?>
+
+                <div class="uk-margin-small <?= ((isset($errors) && array_key_exists('categories', $errors)) ? "uk-form-danger" : "") ?>">
+                    <label>Categorias</label>
+                    <div class="uk-panel uk-panel-scrollable uk-border-rounded">
+                        <ul class="uk-list">
+                            <?php
+                            foreach ($categories as $category) {
+                            ?>
+                                <li>
+                                    <label><input class="uk-checkbox uk-border-rounded" type="checkbox" name="categories[]" value="<?= $category['id'] ?>"><?= $category['name'] ?></label>
+                                    <ul>
+                                        <?= implode(" ", printChildCategories($category['child'])) ?>
+                                    </ul>
+                                </li>
+                            <?php
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                </div>
 
                 <div class="uk-margin-small">
                     <label for="descargable"><?= form_checkbox($descargable) ?>Downloadable?</label>
                 </div>
 
-                <div class="uk-margin-small">
+                <div class="uk-margin-top-small">
+                    <label for="subscription"><?= form_checkbox($subscription) ?>Needs subscription?</label>
+                </div>
+
+                <div class="uk-margin uk-text-center">
                     <div uk-form-custom="target: true">
                         <input type="file" name="file" id="file">
-                        <input class="uk-input uk-border-pill" type="text" placeholder="Select file" disabled>
+                        <input class="uk-input uk-border-pill <?= (isset($errors) && array_key_exists('file', $errors)) ? "uk-form-danger" : "" ?>" type="text" placeholder="Select file" disabled>
                     </div>
                 </div>
 

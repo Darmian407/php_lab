@@ -73,7 +73,7 @@ $user = $session->get('user');
 
                 <h3 class="uk-card-title">Datos del <?= $user['DTYPE'] ?></h3>
 
-                <img class="uk-border-rounded uk-margin-small" data-src="<?= $user['image']?>" width="300px" height="" alt="https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png" uk-img>
+                <img class="uk-border-rounded uk-margin-small" data-src="<?= ($user['image'] ? $user['image'] : 'https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png' ) ?>" width="300px" height="" alt="" uk-img>
 
                 <?= form_open('') ?>
 
