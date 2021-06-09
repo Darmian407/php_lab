@@ -146,9 +146,17 @@ $user = $session->get('user');
 
                 <?= form_input($birthDate) ?>
 
+                <?php
 
-
-
+            if ($user['DTYPE'] == 'Autor') {
+            ?>
+                <div>
+                    <h1><?= $sales['downloads'] ?></h1>
+                </div>
+                
+            <?php
+            } 
+            ?>
             </div>
 
             <?php
@@ -160,6 +168,7 @@ $user = $session->get('user');
             ?>
                 <a class="uk-text-center uk-button uk-button-default" href="/listas_visualizacion/<?= $user['id'] ?>">Listas</a>
             <?php } ?>
+
         </div>
 
     </div>

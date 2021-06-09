@@ -20,7 +20,7 @@ if (!empty($result)) {
                         <div class=" uk-card uk-card-body">
                             <img data-src="<?= $result['image'] ?>" width="400" height="200" alt="" uk-img>
                             
-                                <a class="uk-button uk-button-primary uk-margin-top uk-width-1-1" href="#modal-container" uk-toggle><?=$message?></i></a>
+                                <a class="uk-button uk-button-primary uk-margin-top uk-width-1-1" href="#modal-vistaprevia" uk-toggle><?=$message?></i></a>
                             
                             <?php                          
                             if($user && $user['DTYPE'] == 'Cliente'){
@@ -29,7 +29,7 @@ if (!empty($result)) {
                             <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="#modal-sections" uk-toggle><i class="fas fa-plus"></i> Añadir a lista </i></a>
                             <?php
                             }
-                            if ($result['downloadable'] && $result['rSub'] && $subscribed) {
+                            if (($result['downloadable'] && $result['rSub'] && $subscribed) || ($result['downloadable'] && !$result['rSub']) ) {
                                 if ($result['type'] == 'AudioLibro' || $result['type'] == 'Podcast') {
                             ?>
                             

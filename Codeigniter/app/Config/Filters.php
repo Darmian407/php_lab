@@ -28,9 +28,10 @@ class Filters extends BaseConfig
 	 *
 	 * @var array
 	 */
+	
 	public $globals = [
 		'before' => [
-			'isLoggedIn' => ['except' => ['/', '/login', '/register', '/planes', '/buscar*', '/categor*', '/public/*'] ]
+			'isLoggedIn' => ['except' => ['/', '/login', '/register', '/planes', '/buscar*', '/categor*', '/uploads/*'] ]
 			// 'honeypot',
 			// 'csrf',
 		],

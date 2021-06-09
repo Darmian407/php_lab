@@ -15,13 +15,18 @@ class Profile extends BaseController
 	{
 		$resourceModel = new \App\Models\ResourceModel();
 
+		$salesModel = new \App\Models\SalesModel();
+
         $types = $resourceModel->getTypes();
 
         $result = $resourceModel->getFavourites();
 
+		$sales = $salesModel->getDownloads();
+
 		$data = [
 			'result' => $result,
-			'types' => $types
+			'types' => $types,
+			'sales' => $sales
 		];
 		
 		return view('profile', $data);
@@ -72,6 +77,7 @@ class Profile extends BaseController
 		return view('listas_visualizacion', $data);
 
 	}
+
 
 
 }
