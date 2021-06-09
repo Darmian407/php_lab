@@ -41,6 +41,22 @@ class UserModel extends Model
      
     }
 
+    public function subscribed()
+    {
+        $session = \Config\Services::session();
+
+        $user = $session->get('user');
+
+        if(isset($user) && $user['DTYPE'] == 'Cliente'){
+            $query = $this->db->query('SELECT * FROM clients c WHERE c.user_id= "' . $user['id'] . '" AND c.subscribed = 1 ');
+
+            return !empty($query->getResultArray());
+        }
+
+        return false;
+
+    }
+
     public function follow($authorId){
 
         $session = \Config\Services::session();

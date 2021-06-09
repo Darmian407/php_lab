@@ -17,7 +17,7 @@ $user = $session->get('user');
     if (!empty($result)) {
     ?>
 
-        <div class="uk-card uk-card uk-card-body uk-text-center uk-height-viewport">
+        <div class="uk-card uk-card uk-card-body uk-text-center uk-height-viewport uk-margin-left">
             <h1>Recursos Guardados</h1>
             <div uk-filter="target: .js-filter">
 
@@ -43,10 +43,13 @@ $user = $session->get('user');
                         foreach ($result as $recurso) {
                     ?>
                             <li type="<?= $recurso['type'] ?>">
-                                <div class="uk-card uk-card-default uk-card-body">
+                                <div class="uk-card uk-card-secondary">
                                     <ul uk-accordion>
                                         <li class="uk-close">
-                                            <a class="uk-accordion-title" href="#"><?= $recurso['name'] ?></a>
+                                            <div class="uk-flex uk-accordion-title">
+                                                <img class="uk-border-rounded uk-margin-small uk-margin-right" data-src="<?= $recurso['image'] ?>" width="50" height="70" alt="" uk-img>
+                                                <a class="uk-accordion-title" href="#"><?= $recurso['name'] ?></a>
+                                            </div>
                                             <div class="uk-accordion-content">
                                                 <a class="uk-button uk-button-default" href="/buscar_id/<?= $recurso['resourceId'] ?>">Detalles</a>
                                             </div>
@@ -73,9 +76,9 @@ $user = $session->get('user');
 
                 <h3 class="uk-card-title">Datos del <?= $user['DTYPE'] ?></h3>
 
-                <img class="uk-border-rounded uk-margin-small" data-src="<?= ($user['image'] ? $user['image'] : 'https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png' ) ?>" width="300px" height="" alt="" uk-img>
+                <img class="uk-border-rounded uk-margin-small" data-src="<?= ($user['image'] ? $user['image'] : 'https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png') ?>" width="300px" height="" alt="" uk-img>
 
-                
+
 
                 <?php
 
@@ -129,7 +132,7 @@ $user = $session->get('user');
                     'readonly' => '',
                 );
 
-               
+
 
                 ?>
 
@@ -143,17 +146,17 @@ $user = $session->get('user');
 
                 <?= form_input($birthDate) ?>
 
-                
 
-                
+
+
             </div>
 
             <?php
-            if($user['DTYPE'] == 'Autor'){
+            if ($user['DTYPE'] == 'Autor') {
             ?>
                 <a class="uk-text-center uk-button uk-button-default" href="/followers/<?= $user['id'] ?>">Seguidores</a>
             <?php
-            } else{
+            } else {
             ?>
                 <a class="uk-text-center uk-button uk-button-default" href="/listas_visualizacion/<?= $user['id'] ?>">Listas</a>
             <?php } ?>

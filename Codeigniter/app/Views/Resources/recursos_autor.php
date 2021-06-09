@@ -36,10 +36,13 @@
                         foreach ($result as $recurso) {
                     ?>
                             <li type="<?= $recurso['type'] ?>">
-                                <div class="uk-card uk-card-default uk-card-body">
+                                <div class="uk-card uk-card-secondary">
                                     <ul uk-accordion>
                                         <li class="uk-close">
-                                            <a class="uk-accordion-title" href="#"><?= $recurso['name'] ?></a>
+                                            <div class="uk-flex uk-accordion-title">
+                                                <img class="uk-border-rounded uk-margin-small uk-margin-right" data-src="<?= $recurso['image'] ?>" width="50" height="70" alt="" uk-img>
+                                                <a class="uk-accordion-title" href="#"><?= $recurso['name'] ?></a>
+                                            </div>
                                             <div class="uk-accordion-content">
                                                 <p><?= $recurso['description'] ?></p>
                                                 <a class="uk-button uk-button-default" href="/buscar_id/<?= $recurso['id'] ?>">Detalles</a>
@@ -75,18 +78,18 @@
                 </div>
 
                 <?php
-                if(!$following){
+                if (!$following) {
                 ?>
                     <a class="uk-button uk-button-default uk-margin-top .uk-width-1-1" href="/follow/<?= $autor['authorId'] ?>"> Seguir </i></a>
                 <?php
-                }else{
+                } else {
                 ?>
                     <a class="uk-button uk-button-default uk-margin-top .uk-width-1-1" href="/unfollow/<?= $autor['authorId'] ?>"> Dejar de seguir </i></a>
                 <?php
                 }
                 ?>
-                
-                
+
+
             </div>
 
         </div>

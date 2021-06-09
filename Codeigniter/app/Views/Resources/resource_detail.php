@@ -29,7 +29,7 @@ if (!empty($result)) {
                             <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="#modal-sections" uk-toggle><i class="fas fa-plus"></i> Añadir a lista </i></a>
                             <?php
                             }
-                            if ($result['downloadable'] == 1) {
+                            if ($result['downloadable'] && $result['rSub'] && $subscribed) {
                             ?>
                                 <button class="uk-button uk-button-primary uk-margin-top .uk-width-1-1"><i class="fas fa-arrow-alt-circle-down"></i> Descargar</i></button>
                             <?php

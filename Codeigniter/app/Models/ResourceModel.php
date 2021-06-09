@@ -69,7 +69,7 @@ class ResourceModel extends Model
 
     public function buscar_id($idResurce)
     {
-        $query = $this->db->query('SELECT r.id,u.id AS authorId, r.downloadable, t.name AS type, r.name, u.name AS author, r.image AS image, r.description, r.filename FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id WHERE r.id = ("' . $idResurce . '") ');
+        $query = $this->db->query('SELECT r.id, u.id AS authorId, r.downloadable, t.name AS type, r.name, u.name AS author, r.image AS image, r.description, r.filename, r.subscription AS rSub FROM resources r JOIN users u ON r.author=u.id JOIN types t ON r.type=t.id WHERE r.id = ("' . $idResurce . '") ');
 
         if ($query) {
             $result = $query->getFirstRow('array');

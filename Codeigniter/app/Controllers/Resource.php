@@ -89,7 +89,7 @@ class Resource extends BaseController
             ]
         ];
 
-        if($tipo === '2'){
+        if($tipo === '2' || $tipo === '4'){
             $rules['file']['rules'] .= '|ext_in[file,mp3]';
             $rules['file']['errors']['ext_in'] = 'Only allowed mp3 files';
         } else {
@@ -179,6 +179,10 @@ class Resource extends BaseController
     {
         $resourceModel = new \App\Models\ResourceModel();
 
+        $userModel = new \App\Models\UserModel();
+
+        $subscribed = $userModel->subscribed();
+
         $result = $resourceModel->buscar_id($idResource);
         $message =  '<i class="fas fa-glasses"></i> Leer Vista Previa';
         if ($result['type'] == 'AudioLibro' || $result['type'] == 'Podcast') {
@@ -187,7 +191,8 @@ class Resource extends BaseController
 
         $data = [
             'result' => $result,
-            'message' => $message
+            'message' => $message,
+            'subscribed' => $subscribed
         ];
 
         return view('Resources/resource_detail', $data);

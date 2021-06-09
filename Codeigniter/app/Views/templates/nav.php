@@ -3,6 +3,11 @@
     $session = \Config\Services::session();
 
     $user = $session->get('user');
+
+    $userModel = new \App\Models\UserModel();
+
+    $subscribed = $userModel->subscribed();
+
     ?>
     <nav class="uk-navbar-container" uk-navbar>
 
@@ -46,7 +51,6 @@
                     </div>
                 </li>
 
-                <li><a class="uk-visible@s" href="/planes">Suscribirse</a></li>
                 <li><a class="uk-visible@s" href="/categories">Categorias</a></li>
 
                 <?php
@@ -55,8 +59,12 @@
 
                     <?php
                     if ($user['DTYPE'] == 'Cliente') {
+                        if (!$subscribed) {
                     ?>
-
+                        <li><a class="uk-visible@s" href="/planes">Suscribirse</a></li>
+                        <?php
+                        }
+                        ?>
                         <li><a class="uk-visible@s" href="/listas_visualizacion">Listas de visualización</a></li>
                         <li><a class="uk-visible@s" href="/followed_authors/<?= $user['id'] ?>">Autores seguidos</a></li>
 
