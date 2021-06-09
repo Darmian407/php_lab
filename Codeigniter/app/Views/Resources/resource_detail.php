@@ -30,9 +30,16 @@ if (!empty($result)) {
                             <?php
                             }
                             if ($result['downloadable'] && $result['rSub'] && $subscribed) {
+                                if ($result['type'] == 'AudioLibro' || $result['type'] == 'Podcast') {
                             ?>
-                                <button class="uk-button uk-button-primary uk-margin-top .uk-width-1-1"><i class="fas fa-arrow-alt-circle-down"></i> Descargar</i></button>
+                            
+                                <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="/uploads/<?= $result['filename'] ?>" download="<?= $result['name'] ?>.mp3"><i class="fas fa-arrow-alt-circle-down"></i> Descargar</i></a>
                             <?php
+                                }else{
+                            ?>
+                                <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="/uploads/<?= $result['filename'] ?>" download="<?= $result['name'] ?>.pdf"><i class="fas fa-arrow-alt-circle-down"></i> Descargar</i></a>
+                            <?php
+                                }
                             }
                             ?>
                         </div>
@@ -52,13 +59,30 @@ if (!empty($result)) {
         </div>
     </div>
 
-    <div id="modal-container" class="uk-modal-container" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body" style="height: 100%;">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <h2 class="uk-modal-title">Vista Previa</h2>
-        <embed src="/uploads/<?=$result['filename']?>#toolbar=0&navpanes=0&scrollbar=0" style="width: 100%; height: 80%;">
+   
+    <?php
+    if ($result['type'] == 'AudioLibro' || $result['type'] == 'Podcast') {
+    ?>
+        <div id="modal-vistaprevia" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <h2 class="uk-modal-title">Muestra de audio</h2>
+                <audio oncontextmenu="return false;" controls controlsList="nodownload">
+                    <source src="/uploads/<?= $result['filename'] ?>" type="audio/mpeg">
+                </audio>
+            </div>
         </div>
-    </div>
+    
+    <?php } else { ?>
+        <div id="modal-vistaprevia" class="uk-modal-container" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body" style="height: 100%;">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <h2 class="uk-modal-title">Vista Previa</h2>
+                <embed src="/uploads/<?= $result['filename'] ?>#toolbar=0&navpanes=0&scrollbar=0&page=1" style="width: 100%; height: 80%;">
+            </div>
+        </div>
+    <?php } ?>
+
     <?php
     if ($user && $user['DTYPE'] == 'Cliente') {
     ?>

@@ -13,7 +13,8 @@
 ?>
 
 <div class="uk-container-center uk-height-viewport">
-    <div class="uk-column-1-2@s uk-column-1-3@m uk-column-1-4@l uk-column-divider uk-padding uk-text-bold ">
+    <h1 class="uk-text-center">Categorias</h1>
+    <div class="uk-column-1-2@s uk-column-1-3@m uk-column-1-4@l uk-column-divider uk-padding uk-text-bold ">     
         <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
             <?php
             foreach ($categories as $category) {
