@@ -151,7 +151,7 @@ $user = $session->get('user');
             if ($user['DTYPE'] == 'Autor') {
             ?>
                 <div>
-                    <h1><?= $sales['downloads'] ?></h1>
+                    <h1>Ganancias: US$ <?= $profit ?></h1>
                 </div>
                 
             <?php

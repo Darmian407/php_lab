@@ -42,4 +42,24 @@ class SalesModel extends Model
         }
     }
 
+    public function addView($idResource){
+        $query = $this->db->query('SELECT u.user_id AS authorId, u.views FROM resources r JOIN authors u ON r.author=u.user_id WHERE r.id = ("' . $idResource . '") ');
+
+        $result = $query->getFirstRow('array');
+        if(!empty($result)){
+            $views = $result['views'] +1;
+            $query = $this->db->query('UPDATE authors SET VIEWS = ("' . $views . '") WHERE user_id=("' . $result['authorId'] . '")');
+        }
+    }
+
+    public function getViews(){
+        $session = \Config\Services::session();
+
+        $user = $session->get('user');
+
+        $query = $this->db->query('SELECT views FROM authors a WHERE a.user_id="' . $user['id'] . '" ' );
+
+        return $query->getFirstRow('array');
+    }
+
 }

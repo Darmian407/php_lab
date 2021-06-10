@@ -21,12 +21,16 @@ class Profile extends BaseController
 
         $result = $resourceModel->getFavourites();
 
-		$sales = $salesModel->getDownloads();
+		$downloads = $salesModel->getDownloads();
+
+		$views = $salesModel->getViews();
+
+		$profit = $downloads['downloads']*0.05 + $views['views']*0.01;
 
 		$data = [
 			'result' => $result,
 			'types' => $types,
-			'sales' => $sales
+			'profit' => $profit,
 		];
 		
 		return view('profile', $data);
@@ -76,6 +80,13 @@ class Profile extends BaseController
 		
 		return view('listas_visualizacion', $data);
 
+	}
+
+	public function download($idResource) {
+		// Sales Model
+		$salesModel = new \App\Models\SalesModel();
+
+		$salesModel->download($idResource);
 	}
 
 

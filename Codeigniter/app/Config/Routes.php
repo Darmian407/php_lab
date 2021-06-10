@@ -75,6 +75,8 @@ $routes->get('/buscar_recursos_categoria/(:num)', 'Resource::buscar_recursos_cat
 
 $routes->get('/add_favourite/(:num)', 'Playlist::add_favourite/$1');
 
+$routes->get('/download/(:num)', 'Profile::download/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

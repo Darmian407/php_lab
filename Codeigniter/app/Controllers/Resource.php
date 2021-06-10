@@ -181,6 +181,8 @@ class Resource extends BaseController
 
         $userModel = new \App\Models\UserModel();
 
+        $salesModel = new \App\Models\SalesModel();
+
         $subscribed = $userModel->subscribed();
 
         $result = $resourceModel->buscar_id($idResource);
@@ -188,6 +190,8 @@ class Resource extends BaseController
         if ($result['type'] == 'AudioLibro' || $result['type'] == 'Podcast') {
             $message = '<i class="fas fa-play"></i> Reproducir Muestra';
         }
+
+        $salesModel->addView($idResource);
 
         $data = [
             'result' => $result,

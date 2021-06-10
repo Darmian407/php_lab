@@ -5,10 +5,10 @@
 <?php echo view('templates/nav') ?>
 
 <?php
-    // Session Service
-    $session = \Config\Services::session();
+// Session Service
+$session = \Config\Services::session();
 
-    $user = $session->get('user');
+$user = $session->get('user');
 
 if (!empty($result)) {
 ?>
@@ -19,25 +19,28 @@ if (!empty($result)) {
                     <li class="uk-width-1-3  uk-text-center">
                         <div class=" uk-card uk-card-body">
                             <img data-src="<?= $result['image'] ?>" width="400" height="200" alt="" uk-img>
-                            
-                                <a class="uk-button uk-button-primary uk-margin-top uk-width-1-1" href="#modal-vistaprevia" uk-toggle><?=$message?></i></a>
-                            
-                            <?php                          
-                            if($user && $user['DTYPE'] == 'Cliente'){
-                            ?>
-                            <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="/add_favourite/<?= $result['id'] ?>"><i class="far fa-bookmark"></i> Guardar </i></a>
-                            <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="#modal-sections" uk-toggle><i class="fas fa-plus"></i> Añadir a lista </i></a>
+
+                            <a class="uk-button uk-button-primary uk-margin-top uk-width-1-1" href="#modal-vistaprevia" uk-toggle><?= $message ?></i></a>
+
                             <?php
+                            if ($user && $user['DTYPE'] == 'Cliente') {
+                            ?>
+                                <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="/add_favourite/<?= $result['id'] ?>"><i class="far fa-bookmark"></i> Guardar </i></a>
+                                <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="#modal-sections" uk-toggle><i class="fas fa-plus"></i> Añadir a lista </i></a>
+                                <?php
                             }
-                            if (($result['downloadable'] && $result['rSub'] && $subscribed) || ($result['downloadable'] && !$result['rSub']) ) {
+                            if (($result['downloadable'] && $result['rSub'] && $subscribed) || ($result['downloadable'] && !$result['rSub'])) {
                                 if ($result['type'] == 'AudioLibro' || $result['type'] == 'Podcast') {
-                            ?>
-                            
-                                <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="/uploads/<?= $result['filename'] ?>" download="<?= $result['name'] ?>.mp3"><i class="fas fa-arrow-alt-circle-down"></i> Descargar</i></a>
-                            <?php
-                                }else{
-                            ?>
-                                <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="/uploads/<?= $result['filename'] ?>" download="<?= $result['name'] ?>.pdf"><i class="fas fa-arrow-alt-circle-down"></i> Descargar</i></a>
+                                ?>
+                                    <div onclick="download()">
+                                        <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="/uploads/<?= $result['filename'] ?>" download="<?= $result['name'] ?>.mp3"><i class="fas fa-arrow-alt-circle-down"></i> Descargar</i></a>
+                                    </div>
+                                <?php
+                                } else {
+                                ?>
+                                    <div onclick="download()">
+                                        <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="/uploads/<?= $result['filename'] ?>" download="<?= $result['name'] ?>.pdf"><i class="fas fa-arrow-alt-circle-down"></i> Descargar</i></a>
+                                    </div>
                             <?php
                                 }
                             }
@@ -59,7 +62,7 @@ if (!empty($result)) {
         </div>
     </div>
 
-   
+
     <?php
     if ($result['type'] == 'AudioLibro' || $result['type'] == 'Podcast') {
     ?>
@@ -72,7 +75,7 @@ if (!empty($result)) {
                 </audio>
             </div>
         </div>
-    
+
     <?php } else { ?>
         <div id="modal-vistaprevia" class="uk-modal-container" uk-modal>
             <div class="uk-modal-dialog uk-modal-body" style="height: 100%;">
@@ -104,9 +107,9 @@ if (!empty($result)) {
 
                     $playlists = [];
                     // Bring types from database
-                    $result = $playlistModel->getPlaylists($user['id']);
+                    $resultPlaylist = $playlistModel->getPlaylists($user['id']);
 
-                    foreach ($result as $playlist) {
+                    foreach ($resultPlaylist as $playlist) {
                         $playlists[$playlist['id']] = $playlist['name'];
                     };
 
@@ -127,6 +130,17 @@ if (!empty($result)) {
     }
     ?>
 
+    <script type="application/javascript">
+        function download() {
+            fetch("<?= base_url() ?>/download/<?= $result['id'] ?>", {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            });
+        }
+    </script>
 <?php
 } else {
 ?>
