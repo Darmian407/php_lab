@@ -81,7 +81,7 @@ if (!empty($result)) {
             <div class="uk-modal-dialog uk-modal-body" style="height: 100%;">
                 <button class="uk-modal-close-default" type="button" uk-close></button>
                 <h2 class="uk-modal-title">Vista Previa</h2>
-                <embed src="/uploads/<?= $result['filename'] ?>#toolbar=0&navpanes=0&scrollbar=0&page=1" style="width: 100%; height: 80%;">
+                <embed src="/uploads/<?= $result['filename'] ?>#page=2&toolbar=0&navpanes=0&scrollbar=0" style="width: 100%; height: 80%;">
             </div>
         </div>
     <?php } ?>
@@ -93,7 +93,7 @@ if (!empty($result)) {
             <div class="uk-modal-dialog">
                 <button class="uk-modal-close-default" type="button" uk-close></button>
                 <div class="uk-modal-header">
-                    <h2 class="uk-modal-title">Modal Title</h2>
+                    <h2 class="uk-modal-title">Seleccione una Lista</h2>
                 </div>
                 <div class="uk-modal-body">
                     <!-- Message Template -->

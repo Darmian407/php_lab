@@ -20,6 +20,8 @@ class Filters extends BaseConfig
 		'toolbar'  => DebugToolbar::class,
 		'honeypot' => Honeypot::class,
 		'isLoggedIn' => \App\Filters\LoginFilter::class,
+		'isAuthor' => \App\Filters\AuthorFilter::class,
+		'isClient' => \App\Filters\ClientFilter::class,
 	];
 
 	/**
@@ -61,5 +63,8 @@ class Filters extends BaseConfig
 	 *
 	 * @var array
 	 */
-	public $filters = [];
+	public $filters = [
+		'isAuthor' => ['before' => ['/createResource*', '/followers']],
+		'isClient' => ['before' => ['/addToLista*', '/listas_visualizacion*', '/follow', '/unfollow*', '/add_favourite*', '/download*', '/followed_authors*']]
+	];
 }
