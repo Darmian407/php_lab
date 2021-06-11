@@ -78,12 +78,14 @@ class UserModel extends Model
         $session = \Config\Services::session();
 
         $user = $session->get('user');
-
+        if($user){
         $query = $this->db->query('SELECT author_id, client_id FROM author_client WHERE author_id = "' . $authorId . '" AND client_id = "' . $user['id'] . '"' );
 
         $validar = $query->getResultArray();
-
+        
         return  $validar?true:false;
+        }
+        return false;
     }
 
     public function unfollow($authorId){

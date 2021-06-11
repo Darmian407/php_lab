@@ -220,7 +220,7 @@ class Resource extends BaseController
             'result' => $result,
             'types' => $types,
             'autor' => $autor,
-            'following' => $following
+            'following' => $following,
         ];
 
         return view('Resources/recursos_autor', $data);

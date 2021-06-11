@@ -78,6 +78,11 @@
                 </div>
 
                 <?php
+                // Session Service
+                $session = \Config\Services::session();
+                $user = $session->get('user');
+
+                if($user&&$user['DTYPE']=='Cliente'){
                 if (!$following) {
                 ?>
                     <a class="uk-button uk-button-default uk-margin-top .uk-width-1-1" href="/follow/<?= $autor['authorId'] ?>"> Seguir </i></a>
@@ -86,7 +91,7 @@
                 ?>
                     <a class="uk-button uk-button-default uk-margin-top .uk-width-1-1" href="/unfollow/<?= $autor['authorId'] ?>"> Dejar de seguir </i></a>
                 <?php
-                }
+                }}
                 ?>
 
 

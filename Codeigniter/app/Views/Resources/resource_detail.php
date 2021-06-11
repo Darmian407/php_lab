@@ -28,7 +28,7 @@ if (!empty($result)) {
                                 <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="/add_favourite/<?= $result['id'] ?>"><i class="far fa-bookmark"></i> Guardar </i></a>
                                 <a class="uk-button uk-button-primary uk-margin-top .uk-width-1-1" href="#modal-sections" uk-toggle><i class="fas fa-plus"></i> Añadir a lista </i></a>
                                 <?php
-                            }
+                            
                             if (($result['downloadable'] && $result['rSub'] && $subscribed) || ($result['downloadable'] && !$result['rSub'])) {
                                 if ($result['type'] == 'AudioLibro' || $result['type'] == 'Podcast') {
                                 ?>
@@ -43,6 +43,7 @@ if (!empty($result)) {
                                     </div>
                             <?php
                                 }
+                            }
                             }
                             ?>
                         </div>
